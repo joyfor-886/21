@@ -1,0 +1,6 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "superpowers@file:///Users/joyfor/Documents/trae_projects/21/.trae/skills/superpower"
+  ]
+}

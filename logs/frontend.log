@@ -1,0 +1,2163 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.4:3000
+✓ Ready in 317ms
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 522ms (next.js: 123ms, application-code: 398ms)
+ GET / 200 in 527ms (next.js: 168ms, application-code: 359ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /plancraft 404 in 130ms (next.js: 21ms, application-code: 109ms)
+ GET /plancraft 404 in 85ms (next.js: 19ms, application-code: 66ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/plancraft" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html
++                         lang="en"
+-                         lang="zh-CN"
+                          className="geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia..."
+                        >
+                          ...
+                            <NotFound>
+                              <HTTPAccessErrorFallback>
+                                <title>
+                                <div style={{...}}>
+                                  <div>
+                                    <style>
+                                    <h1
+                                      className="next-error-h1"
+                                      style={{display:"inline-block",margin:"0 20px 0 0",padding:"0 23px 0 0",fontSize:24,fontWeight:500, ...}}
+-                                     _msttexthash="15808"
+-                                     _msthash="1"
+                                    >
++                                     404
+                                    <div style={{display:"i..."}}>
+                                      <h2
+                                        style={{fontSize:14,fontWeight:400,lineHeight:"49px",margin:0}}
+-                                       _msttexthash="28976233"
+-                                       _msthash="2"
+                                      >
++                                       This page could not be found.
+-                                       此页面未能找到。
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at h2 (<anonymous>)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 44ms (next.js: 7ms, application-code: 37ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /plancraft 404 in 23ms (next.js: 5ms, application-code: 19ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 23ms (next.js: 3ms, application-code: 20ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 397ms (next.js: 51ms, application-code: 346ms)
+ GET / 200 in 401ms (next.js: 123ms, application-code: 278ms)
+ GET / 200 in 403ms (next.js: 93ms, application-code: 311ms)
+ GET / 200 in 114ms (next.js: 7ms, application-code: 107ms)
+ GET / 200 in 158ms (next.js: 20ms, application-code: 138ms)
+ GET / 200 in 156ms (next.js: 18ms, application-code: 138ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 123ms (next.js: 4ms, application-code: 119ms)
+ GET / 200 in 113ms (next.js: 3ms, application-code: 110ms)
+ GET / 200 in 114ms (next.js: 16ms, application-code: 98ms)
+ GET / 200 in 234ms (next.js: 21ms, application-code: 213ms)
+ GET / 200 in 259ms (next.js: 11ms, application-code: 249ms)
+ GET / 200 in 259ms (next.js: 35ms, application-code: 224ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 143ms (next.js: 30ms, application-code: 113ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 233ms (next.js: 88ms, application-code: 146ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /@vite/client 404 in 38ms (next.js: 12ms, application-code: 26ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 29ms (next.js: 5ms, application-code: 24ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /@vite/client 404 in 27ms (next.js: 3ms, application-code: 24ms)
+✓ Compiled in 108ms
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 235ms (next.js: 74ms, application-code: 161ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /@vite/client 404 in 44ms (next.js: 19ms, application-code: 25ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 58ms (next.js: 10ms, application-code: 48ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /@vite/client 404 in 41ms (next.js: 6ms, application-code: 35ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 93ms (next.js: 4ms, application-code: 88ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /@vite/client 404 in 28ms (next.js: 3ms, application-code: 25ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 74ms (next.js: 20ms, application-code: 54ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /@vite/client 404 in 28ms (next.js: 4ms, application-code: 24ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 37ms (next.js: 5ms, application-code: 32ms)
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:193:2
+Parsing CSS source code failed
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:193:2
+  [90m191 |[0m   }
+  [90m192 |[0m }
+[31m[1m>[0m [90m193 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m194 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m195 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m196 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /@vite/client 404 in 25ms (next.js: 5ms, application-code: 20ms)
+✓ Compiled in 143ms
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 44ms (next.js: 9ms, application-code: 35ms)
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /@vite/client 404 in 34ms (next.js: 7ms, application-code: 28ms)
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 53ms (next.js: 12ms, application-code: 41ms)
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /@vite/client 404 in 26ms (next.js: 5ms, application-code: 22ms)
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 43ms (next.js: 6ms, application-code: 38ms)
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET /@vite/client 404 in 22ms (next.js: 2ms, application-code: 20ms)
+⚠ ./src/app/globals.css:206:2
+Parsing CSS source code failed
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+'root' is not recognized as a valid pseudo-element. Did you mean ':root' (pseudo-class) or is this a typo?
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:206:2
+  [90m204 |[0m   }
+  [90m205 |[0m }
+[31m[1m>[0m [90m206 |[0m ::root {
+  [90m    |[0m  [31m[1m^[0m
+  [90m207 |[0m   --ink-dark: #[35m1[0ma1a1a;
+  [90m208 |[0m   --ink-medium: #[35m3[0md3d3d;
+  [90m209 |[0m   --ink-light: #[35m6[0mb6b6b;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+ GET / 200 in 37ms (next.js: 5ms, application-code: 32ms)
+✓ Compiled in 28ms
+✓ Compiled in 27ms
+✓ Compiled in 22ms
+✓ Compiled in 30ms
+✓ Compiled in 501ms
+✓ Compiled in 30.9s
+[?25h

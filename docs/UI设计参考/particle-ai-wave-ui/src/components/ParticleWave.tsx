@@ -1,0 +1,228 @@
+import React, { useRef, useEffect } from 'react';
+
+export interface WaveConfig {
+  // 1. 主涌浪
+  w1Amp: number; w1Speed: number; w1Freq: number; w1DirX: number; w1DirZ: number;
+  // 2. 副涌浪
+  w2Amp: number; w2Speed: number; w2Freq: number; w2DirX: number; w2DirZ: number;
+  // 3. 主涟漪
+  w3Amp: number; w3Speed: number; w3Freq: number; w3DirX: number; w3DirZ: number;
+  // 4. 次波纹
+  w4Amp: number; w4Speed: number; w4Freq: number; w4DirX: number; w4DirZ: number;
+  // 5. 全局呼吸
+  w5Amp: number; w5Speed: number;
+  // 相机设置
+  cameraPitch: number; cameraY: number; cameraHeightBase: number;
+  // 粒子形态与网格参数
+  particleSizeBase: number;
+  particleSizeJitter: number;
+  particleOpacityBase: number;
+  particleColorRGB: string; // format: "255, 255, 255"
+  gridSpacingX: number;
+  gridSpacingZ: number;
+  gridJitter: number;
+  oceanWidth: number;
+  oceanDepth: number;
+}
+
+export const defaultWaveConfig: WaveConfig = {
+  w1Amp: 20, w1Speed: 0.8, w1Freq: 0.004, w1DirX: 1, w1DirZ: 0.8,
+  w2Amp: 12, w2Speed: 0.6, w2Freq: 0.006, w2DirX: 1, w2DirZ: -1.2,
+  w3Amp: 8,  w3Speed: 1.2, w3Freq: 0.015, w3DirX: 1, w3DirZ: -0.7,
+  w4Amp: 4,  w4Speed: 1.5, w4Freq: 0.030, w4DirX: 1, w4DirZ: 0.9,
+  w5Amp: 6,  w5Speed: 0.3,
+  
+  cameraPitch: 45,
+  cameraY: 150,
+  cameraHeightBase: 300,
+
+  particleSizeBase: 0.6,
+  particleSizeJitter: 1.2,
+  particleOpacityBase: 0.7,
+  particleColorRGB: "255, 255, 255",
+  gridSpacingX: 20,
+  gridSpacingZ: 20,
+  gridJitter: 0.3,
+  oceanWidth: 4000,
+  oceanDepth: 3600,
+};
+
+interface Props {
+  config?: WaveConfig;
+}
+
+const ParticleWave: React.FC<Props> = ({ config = defaultWaveConfig }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const configRef = useRef(config);
+  const oceanParticlesRef = useRef<{x: number, z: number, size: number, opMult: number}[]>([]);
+  const lastGridStrRef = useRef<string>('');
+
+  useEffect(() => {
+    configRef.current = config;
+  }, [config]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { alpha: false }); // alpha: false might improve performance if we fill background, but we need transparent background
+    if (!ctx) return;
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    let time = 0;
+    let animationFrameId: number;
+
+    // Build independent floating dust representing data points
+    const dust: {x: number, y: number, z: number, speed: number, radius: number}[] = [];
+    for(let i=0; i<300; i++) {
+        dust.push({
+            x: (Math.random() - 0.5) * 4000,
+            y: (Math.random() - 0.5) * 1500,
+            z: Math.random() * 3600 + 100,
+            speed: Math.random() * 0.6 + 0.1,
+            radius: Math.random() * 1.2 + 0.4
+        });
+    }
+
+    const render = () => {
+      time += 0.012;
+      ctx.clearRect(0, 0, width, height);
+
+      const conf = configRef.current;
+
+      // Check if grid settings changed and rebuild if necessary
+      const gridStr = `${conf.gridSpacingX},${conf.gridSpacingZ},${conf.gridJitter},${conf.particleSizeBase},${conf.particleSizeJitter},${conf.particleOpacityBase},${conf.oceanWidth},${conf.oceanDepth}`;
+      if (gridStr !== lastGridStrRef.current) {
+         lastGridStrRef.current = gridStr;
+         const xCount = Math.floor(conf.oceanWidth / conf.gridSpacingX);
+         const zCount = Math.floor(conf.oceanDepth / conf.gridSpacingZ);
+         const newParticles = [];
+         for (let z = 0; z < zCount; z++) {
+           for (let x = 0; x < xCount; x++) {
+             const jitterX = (Math.random() - 0.5) * conf.gridSpacingX * conf.gridJitter;
+             const jitterZ = (Math.random() - 0.5) * conf.gridSpacingZ * conf.gridJitter;
+             newParticles.push({
+               x: (x - xCount / 2) * conf.gridSpacingX + jitterX,
+               z: z * conf.gridSpacingZ - 300 + jitterZ, 
+               size: Math.random() * conf.particleSizeJitter + conf.particleSizeBase,
+               opMult: Math.random() * (1 - conf.particleOpacityBase) + conf.particleOpacityBase
+             });
+           }
+         }
+         oceanParticlesRef.current = newParticles;
+      }
+
+      const oceanParticles = oceanParticlesRef.current;
+
+      const cx = width / 2;
+      const cy = height / 2 + conf.cameraHeightBase; 
+      const fov = 500;
+
+      // Pitch camera 
+      const pitch = conf.cameraPitch * (Math.PI / 180);
+      const cosPitch = Math.cos(pitch);
+      const sinPitch = Math.sin(pitch);
+      const cameraY = conf.cameraY;
+
+      // Draw Pure Particle Ocean
+      ctx.fillStyle = `rgba(${conf.particleColorRGB}, 1)`;
+
+      for (let i = oceanParticles.length - 1; i >= 0; i--) {
+        const p = oceanParticles[i];
+
+        // Layering multiple sine waves with varying frequencies for organic, fluid peaks and valleys
+        const swell1 = Math.sin(p.x * conf.w1Freq * conf.w1DirX + time * conf.w1Speed + p.z * conf.w1Freq * conf.w1DirZ) * conf.w1Amp;
+        const swell2 = Math.cos(p.x * conf.w2Freq * conf.w2DirX - time * conf.w2Speed + p.z * conf.w2Freq * conf.w2DirZ) * conf.w2Amp;
+        const ripple1 = Math.sin(p.x * conf.w3Freq * conf.w3DirX + time * conf.w3Speed + p.z * conf.w3Freq * conf.w3DirZ) * conf.w3Amp;
+        const ripple2 = Math.cos(p.x * conf.w4Freq * conf.w4DirX - time * conf.w4Speed + p.z * conf.w4Freq * conf.w4DirZ) * conf.w4Amp;
+        const breath = Math.sin(time * conf.w5Speed + p.x * 0.001) * conf.w5Amp;
+        
+        const waveY = swell1 + swell2 + ripple1 + ripple2 + breath;
+
+        // Coordinates relative to camera
+        const relY = waveY - cameraY;
+        const relZ = p.z;
+
+        // Apply 3D pitch rotation
+        const rotY = relY * cosPitch - relZ * sinPitch;
+        const rotZ = relY * sinPitch + relZ * cosPitch;
+
+        // Drop particles that are strictly behind the camera focal point
+        if (rotZ < -fov + 10) continue;
+
+        const scale = fov / (fov + rotZ);
+        const x2d = p.x * scale + cx;
+        const y2d = rotY * scale + cy;
+
+        // Base opacity: smooth fade out towards horizon
+        let opacity = Math.min(1, Math.max(0, 1 - (p.z / conf.oceanDepth)));
+        
+        // Very smooth aggressive fade as it approaches the camera lens to prevent popping and boundary holes
+        if (rotZ < 150) {
+            opacity *= Math.max(0, (rotZ + fov - 10) / (fov + 140));
+        }
+        
+        opacity *= p.opMult;
+
+        // Only draw if visibly on screen and somewhat opaque
+        if (x2d > -100 && x2d < width + 100 && y2d > -100 && y2d < height + 300 && opacity > 0.02) {
+            ctx.globalAlpha = opacity;
+            
+            // Using fillRect instead of arc for massive performance boost with this density
+            const s = p.size * scale * (waveY > 0 ? 1.2 : 0.8);
+            ctx.fillRect(x2d, y2d, s, s);
+        }
+      }
+
+      // Draw Floating Data Dust
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+      for (let i = 0; i < dust.length; i++) {
+         const d = dust[i];
+         d.y -= d.speed;
+         d.x += Math.sin(d.y * 0.005) * 0.5;
+         
+         // Loop dust
+         if (d.y < -800) d.y = 800;
+
+         const relZ = d.z;
+         const relY = d.y - cameraY;
+
+         const rotY = relY * cosPitch - relZ * sinPitch;
+         const rotZ = relY * sinPitch + relZ * cosPitch;
+
+         if (rotZ < -fov + 10) continue;
+
+         const scale = fov / (fov + rotZ);
+         const x2d = d.x * scale + cx;
+         const y2d = rotY * scale + cy - 200; 
+
+         if (x2d > 0 && x2d < width && y2d > 0 && y2d < height) {
+             ctx.globalAlpha = 1;
+             ctx.beginPath();
+             ctx.arc(x2d, y2d, d.radius * scale, 0, Math.PI * 2);
+             ctx.fill();
+         }
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    const handleResize = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none" />;
+};
+
+export default ParticleWave;
