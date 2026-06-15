@@ -2,22 +2,33 @@
 
 > 东方美学 AI 项目规划与对话生成平台
 
+<p align="center">
+  <img src="frontend/public/screenshots/homepage.png" alt="枢墨 Ssuma 意识空间" width="800">
+</p>
+
 ## 简介
 
-枢墨（Ssuma）是一个以东方水墨美学为设计语言的 AI 驱动项目规划平台。它将传统项目管理方法论与大型语言模型（LLM）相结合，通过「七艺」工作流（启枢→裁衡→甄微→策书→凝墨→破妄→渐衍）引导用户完成从需求澄清到代码生成的完整项目生命周期。
+枢墨（Ssuma）是一个以东方水墨美学为设计语言的 AI 驱动项目规划平台。它将传统项目管理方法论与大型语言模型（LLM）相结合，通过「八技艺」工作流（启枢 → 探隐 → 裁衡 → 甄微 → 策书 → 凝墨 → 破妄 → 渐衍）引导用户完成从需求澄清到代码生成的完整项目生命周期。
 
 ## 核心特性
 
-- **七艺工作流**：启枢 · 追问澄清、裁衡 · 价值审视、甄微 · 技术评审、策书 · 任务规划、凝墨 · 方案整合、破妄 · 覆盖验证、渐衍 · 分阶段生成
+- **八技艺工作流**：启枢 → 探隐 → 裁衡 → 甄微 → 策书 → 凝墨 → 破妄 → 渐衍
 - **三通道模式**：快速（3步）、标准（5步）、深度（8步）
 - **多模型支持**：OpenAI、Claude、DeepSeek、Gemini、Moonshot、Ollama、LM Studio 等 10+ 供应商
 - **水墨风格 UI**：Three.js 粒子场景 + Canvas 墨海动画，支持玄墨/宣纸双主题
-- **语音交互**：MediaRecorder 录音 + 多后端 STT（Groq/OpenAI/faster-whisper）+ edge-tts 机械音色合成
+- **语音交互**：浏览器原生语音识别 + MediaRecorder 回退 + TTS 语音合成
 - **Human-in-the-Loop**：裁衡、甄微、凝墨阶段支持人工确认中断
 - **MCP 工具集成**：支持 Model Context Protocol 工具调用
 - **项目记忆系统**：工作记忆 → 项目记忆 → 进化记忆三层架构
 - **反思循环（Reflexion）**：输出→反思→纠正→再输出的自精炼机制
-- **Auto-Pilot**：一键自动流水线，从需求到方案全自动生成
+
+### 界面预览
+
+<p align="center">
+  <img src="frontend/public/screenshots/chat.png" alt="对话界面" width="800">
+</p>
+
+<p align="center"><i>水墨风格的对话界面，Three.js 粒子场景实时响应语音输入</i></p>
 
 ## 技术栈
 
