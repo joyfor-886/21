@@ -6,23 +6,22 @@ from fastapi.responses import StreamingResponse
 from db.sqlite import Database
 from services.project_service import ProjectService
 from services.context_manager import ContextManager
-from services.adaptive_flow import AdaptiveFlowService
+from services.flow.service import FlowService
 from api.models import ChatRequest, ChatResponse
+from api.dependencies import get_db, get_flow_service, MAX_CONVERSATION_CHARS
 from core.errors import SsumaError, ErrorCode
 
 logger = logging.getLogger('Ssuma.ChatAPI')
 
 router = APIRouter(prefix="", tags=["chat"])
 
-MAX_CONVERSATION_CHARS = 10000
-
-
-def get_db():
-    return Database()
-
 
 @router.post("/chat", response_model=ChatResponse)
-async def chat(req: ChatRequest, db: Database = Depends(get_db)):
+async def chat(
+    req: ChatRequest,
+    db: Database = Depends(get_db),
+    flow_service: FlowService = Depends(get_flow_service),
+):
     project_id = ProjectService.ensure_project(req.project_id, req.message, db)
 
     ProjectService.save_message(project_id, "user", req.message, db=db)
@@ -32,7 +31,7 @@ async def chat(req: ChatRequest, db: Database = Depends(get_db)):
     )
 
     try:
-        result = await AdaptiveFlowService.process_message(
+        result = await flow_service.process_message(
             project_id, req.message, conversation, None, req.attachments
         )
         response_text = result["response"]
@@ -56,9 +55,11 @@ async def chat(req: ChatRequest, db: Database = Depends(get_db)):
 
 
 @router.post("/chat/stream")
-async def chat_stream(req: ChatRequest, db: Database = Depends(get_db)):
-    from core.llm_factory import LLMFactory
-
+async def chat_stream(
+    req: ChatRequest,
+    db: Database = Depends(get_db),
+    flow_service: FlowService = Depends(get_flow_service),
+):
     async def stream_gen():
         project_id = ProjectService.ensure_project(req.project_id, req.message, db)
 
@@ -69,21 +70,16 @@ async def chat_stream(req: ChatRequest, db: Database = Depends(get_db)):
         )
 
         try:
-            provider = LLMFactory.get_provider()
-            messages = []
-            if conversation:
-                messages.append({"role": "system", "content": conversation})
-            messages.append({"role": "user", "content": req.message})
+            async for chunk_data in flow_service.process_message_stream(
+                project_id, req.message, conversation, req.force_workflow, req.attachments
+            ):
+                yield f"data: {json.dumps(chunk_data)}\n\n"
 
-            full_response = ""
-            async for chunk in provider.chat_stream(messages, max_tokens=4096):
-                full_response += chunk
-                yield f"data: {json.dumps({'content': chunk})}\n\n"
-
-            ProjectService.save_message(
-                project_id, "assistant", full_response, db=db
-            )
-            yield f"data: {json.dumps({'content': '', 'done': True, 'project_id': project_id})}\n\n"
+                if chunk_data.get("done"):
+                    ProjectService.save_message(
+                        project_id, "assistant", chunk_data.get("full_response", ""),
+                        skill_used=chunk_data.get("current_phase", ""), db=db
+                    )
         except Exception as e:
             logger.error(f"Stream error: {str(e)}")
             yield f"data: {json.dumps({'content': f'Error: {str(e)}', 'done': True})}\n\n"

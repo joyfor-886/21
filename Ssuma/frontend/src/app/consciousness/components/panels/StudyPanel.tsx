@@ -2,19 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { fetchProviders, fetchModels } from '../../../../lib/api'
-import type { FetchedModel } from '../../../../lib/types'
-
-interface LLMConfig {
-  mode: string
-  chat_model: {
-    provider: string
-    model: string
-    base_url?: string
-    api_key?: string
-  }
-  current_tier?: string
-  current_tier_label?: string
-}
+import type { FetchedModel, LLMConfig, ApplyModelConfigRequest } from '../../../../lib/types'
 
 interface ProviderItem {
   name: string
@@ -26,7 +14,7 @@ interface ProviderItem {
 interface Props {
   config: LLMConfig | null
   onClose: () => void
-  onApply: (config: any) => void
+  onApply: (config: ApplyModelConfigRequest) => void
 }
 
 export default function StudyPanel({ config, onClose, onApply }: Props) {

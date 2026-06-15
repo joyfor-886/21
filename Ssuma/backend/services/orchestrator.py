@@ -96,6 +96,17 @@ class OrchestratorService:
     """Beta: Step-by-step task execution orchestrator."""
 
     _projects: Dict[str, OrchestratorProject] = {}
+    _MAX_INMEMORY_PROJECTS = 100
+
+    @classmethod
+    def _evict_if_needed(cls):
+        if len(cls._projects) <= cls._MAX_INMEMORY_PROJECTS:
+            return
+        evict_count = len(cls._projects) - cls._MAX_INMEMORY_PROJECTS + 10
+        keys_to_evict = list(cls._projects.keys())[:evict_count]
+        for key in keys_to_evict:
+            del cls._projects[key]
+        logger.info(f"Evicted {len(keys_to_evict)} orchestrator projects from memory")
 
     @classmethod
     def _ensure_loaded(cls, project_id: str):
@@ -106,6 +117,7 @@ class OrchestratorService:
                 cls._projects[project_id] = OrchestratorProject.from_dict(data)
             else:
                 cls._projects[project_id] = OrchestratorProject(project_id=project_id)
+            cls._evict_if_needed()
 
     @classmethod
     def _save_to_repo(cls, project_id: str):

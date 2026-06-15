@@ -104,7 +104,7 @@ class Skill(ABC):
                 if not (turns and turns[-1]["role"] == "user" and turns[-1]["content"] == current_msg):
                     turns.append({"role": "user", "content": current_msg})
 
-        elif "用户:" in text or "助手:" in text:
+        elif "用户:" in text or "助手:" in text or "user:" in text.lower() or "assistant:" in text.lower():
             for line in text.strip().split("\n"):
                 s = line.strip()
                 if not s:
@@ -113,6 +113,10 @@ class Skill(ABC):
                     turns.append({"role": "user", "content": s[3:].strip()})
                 elif s.startswith("助手: ") or s.startswith("助手："):
                     turns.append({"role": "assistant", "content": s[3:].strip()})
+                elif s.startswith("user: ") or s.startswith("User: "):
+                    turns.append({"role": "user", "content": s[6:].strip()})
+                elif s.startswith("assistant: ") or s.startswith("Assistant: "):
+                    turns.append({"role": "assistant", "content": s[11:].strip()})
 
         return turns
 

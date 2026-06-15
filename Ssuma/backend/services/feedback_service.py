@@ -47,6 +47,17 @@ class FeedbackService:
     """Track user satisfaction and AI response quality."""
     
     _feedback_store: Dict[str, List[UserFeedback]] = {}
+    _MAX_INMEMORY_PROJECTS = 100
+
+    @classmethod
+    def _evict_if_needed(cls):
+        if len(cls._feedback_store) <= cls._MAX_INMEMORY_PROJECTS:
+            return
+        evict_count = len(cls._feedback_store) - cls._MAX_INMEMORY_PROJECTS + 10
+        keys_to_evict = list(cls._feedback_store.keys())[:evict_count]
+        for key in keys_to_evict:
+            del cls._feedback_store[key]
+        logger.info(f"Evicted {len(keys_to_evict)} feedback projects from memory")
 
     @classmethod
     def _load_from_repo(cls, project_id: str) -> List[UserFeedback]:
@@ -71,6 +82,7 @@ class FeedbackService:
         """确保项目数据已从 StateRepository 加载"""
         if project_id not in cls._feedback_store:
             cls._feedback_store[project_id] = cls._load_from_repo(project_id)
+            cls._evict_if_needed()
 
     @classmethod
     def add_feedback(

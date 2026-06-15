@@ -1,8 +1,11 @@
 # Dependencies
 node_modules/
 venv/
+
+# Environment
 .env
 .env.local
+user_settings.json
 
 # Build outputs
 .next/

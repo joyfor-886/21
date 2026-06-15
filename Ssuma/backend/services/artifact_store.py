@@ -29,6 +29,20 @@ class ArtifactStore:
     """
 
     _artifacts: Dict[str, List[PhaseArtifact]] = {}
+    MAX_INMEMORY_PROJECTS = 200
+
+    @classmethod
+    def _evict_if_needed(cls):
+        if len(cls._artifacts) <= cls.MAX_INMEMORY_PROJECTS:
+            return
+        excess = len(cls._artifacts) - cls.MAX_INMEMORY_PROJECTS
+        keys_to_evict = sorted(
+            cls._artifacts.keys(),
+            key=lambda k: len(cls._artifacts[k])
+        )[:excess]
+        for key in keys_to_evict:
+            del cls._artifacts[key]
+            logger.info(f"ArtifactStore evicted project {key} (LRU)")
 
     @classmethod
     def _ensure_loaded(cls, project_id: str):
@@ -39,6 +53,7 @@ class ArtifactStore:
                 cls._artifacts[project_id] = [PhaseArtifact.from_dict(a) for a in data]
             else:
                 cls._artifacts[project_id] = []
+            cls._evict_if_needed()
 
     @classmethod
     def _save_to_repo(cls, project_id: str):

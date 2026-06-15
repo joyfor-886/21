@@ -10,8 +10,8 @@ from domain.enums import (
     WORKFLOW_SYSTEM_PROMPTS,
     INTENT_PHASE_MAP,
 )
-from domain.state import FlowState, QuestionnaireState
-from domain.results import IntentAnalysisResult, SkillResult, CompletionResult, PhaseArtifact
+from domain.state import FlowState, TanyinState
+from domain.results import IntentAnalysisResult, SkillResult, PhaseArtifact
 
 __all__ = [
     "FlowPhase",
@@ -25,7 +25,7 @@ __all__ = [
     "WORKFLOW_SYSTEM_PROMPTS",
     "INTENT_PHASE_MAP",
     "FlowState",
-    "QuestionnaireState",
+    "TanyinState",
     "IntentAnalysisResult",
     "SkillResult",
     "CompletionResult",

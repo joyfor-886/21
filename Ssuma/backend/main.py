@@ -1,6 +1,7 @@
 """Ssuma Backend - FastAPI Application"""
 import os
 import json
+import hmac
 import asyncio
 import logging
 from contextlib import asynccontextmanager
@@ -15,9 +16,11 @@ from core.errors import SsumaError, ERROR_HTTP_STATUS
 from db.sqlite import Database
 from core.llm_factory import LLMFactory
 from core.state_repository import StateRepository
-from services.adaptive_flow import AdaptiveFlowService
+from services.flow.service import FlowService
 from services.intent_analyzer import IntentAnalyzer
-from services.questionnaire_service import QuestionnaireService
+from services.tanyin_service import TanyinService
+from services.project_service import ProjectService
+from services.context_manager import ContextManager
 
 from api.wiki import router as wiki_router
 from api.chat import router as chat_router
@@ -28,7 +31,10 @@ from api.llm_config import router as llm_config_router
 from api.feedback import router as feedback_router
 from api.orchestrator import router as orchestrator_router
 from api.evolution import router as evolution_router
-from api.questionnaire import router as questionnaire_router
+from api.tanyin import router as tanyin_router
+from api.voice import router as voice_router
+from api.mcp import router as mcp_router
+from api.hitl import router as hitl_router
 
 logging.basicConfig(
     level=logging.INFO,
@@ -41,7 +47,6 @@ logging.basicConfig(
 logger = logging.getLogger('Ssuma')
 
 from skills import register_builtin_skills
-register_builtin_skills()
 
 _default_cors_origins = [
     "http://localhost:3000",
@@ -56,6 +61,17 @@ cors_origins = Config().server.get("cors_origins", _default_cors_origins)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    register_builtin_skills()
+    logger.info("Builtin skills registered")
+
+    db = Database()
+    db._init_db()
+    app.state.db = db
+    logger.info("Database initialized")
+
+    StateRepository.initialize()
+    logger.info("StateRepository initialized")
+
     try:
         LLMFactory.initialize()
         logger.info("LLMFactory initialized")
@@ -69,7 +85,42 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"Context auto-configure failed: {e}")
 
+    # 创建 FlowService 实例并存入 app.state
+    from services.flow.service import FlowService
+    flow_service = FlowService()
+    app.state.flow_service = flow_service
+    logger.info("FlowService initialized and stored in app.state")
+
+    # 初始化项目记忆表
+    try:
+        from core.project_memory import ProjectMemoryStore
+        ProjectMemoryStore(db).ensure_table()
+        logger.info("ProjectMemoryStore table ensured")
+    except Exception as e:
+        logger.warning(f"ProjectMemoryStore table creation failed: {e}")
+
+    # 初始化 MCP 客户端
+    try:
+        from core.mcp_client import initialize_mcp
+        mcp_config = Config().mcp
+        if mcp_config:
+            mcp_manager = await initialize_mcp(mcp_config)
+            app.state.mcp_manager = mcp_manager
+            logger.info("MCP client manager initialized")
+        else:
+            logger.info("No MCP servers configured")
+    except Exception as e:
+        logger.warning(f"MCP initialization failed: {e}")
+
     yield
+
+    # 关闭 MCP 连接
+    try:
+        from core.mcp_client import shutdown_mcp
+        await shutdown_mcp()
+        logger.info("MCP connections closed")
+    except Exception as e:
+        logger.warning(f"MCP shutdown failed: {e}")
 
 
 app = FastAPI(title="Ssuma API", version="1.0.0", lifespan=lifespan)
@@ -112,19 +163,18 @@ app.include_router(llm_config_router, prefix="/api/v1")
 app.include_router(feedback_router, prefix="/api/v1")
 app.include_router(orchestrator_router, prefix="/api/v1")
 app.include_router(evolution_router, prefix="/api/v1")
-app.include_router(questionnaire_router, prefix="/api/v1")
-
-db = Database()
-db._init_db()
-
-StateRepository.initialize()
+app.include_router(tanyin_router, prefix="/api/v1")
+app.include_router(voice_router, prefix="/api/v1")
+app.include_router(mcp_router, prefix="/api/v1")
+app.include_router(hitl_router, prefix="/api/v1")
 
 
 @app.get("/api/v1/health", response_model=dict)
-async def health_check():
+async def health_check(request: Request):
     result = {"status": "ok", "version": "1.0.0", "checks": {}}
 
     try:
+        db = getattr(request.app.state, "db", None) or Database()
         conn = db._get_connection()
         conn.execute("SELECT 1")
         result["checks"]["database"] = {"status": "ok"}
@@ -165,6 +215,14 @@ async def get_llm_settings():
     from core.config import Config
     config = Config()
     return config.llm
+
+
+@app.post("/api/v1/config/reload", response_model=dict)
+async def reload_config():
+    from core.config import Config
+    Config.reload()
+    logger.info("Configuration reloaded")
+    return {"success": True, "message": "Configuration reloaded"}
 
 
 @app.get("/api/health", response_model=dict, include_in_schema=False)
@@ -214,7 +272,7 @@ async def websocket_chat(websocket: WebSocket, project_id: str):
                     if header_name.lower() == "authorization" and provided.startswith("Bearer "):
                         provided = provided[7:]
                     break
-        if provided != api_key:
+        if not hmac.compare_digest(provided, api_key):
             await websocket.close(code=4001, reason="Unauthorized")
             return
 
@@ -233,6 +291,8 @@ async def websocket_chat(websocket: WebSocket, project_id: str):
 
     heartbeat_task = asyncio.create_task(heartbeat())
 
+    db = getattr(websocket.app.state, "db", None) or Database()
+
     try:
         while True:
             data = await websocket.receive_text()
@@ -248,6 +308,9 @@ async def websocket_chat(websocket: WebSocket, project_id: str):
                 continue
 
             message = message_data.get("message", "")
+            force_workflow = message_data.get("force_workflow")
+            attachments = message_data.get("attachments")
+
             if not message:
                 continue
 
@@ -258,31 +321,53 @@ async def websocket_chat(websocket: WebSocket, project_id: str):
                 })
                 continue
 
-            from services.project_service import ProjectService
-            from services.context_manager import ContextManager
-
             ProjectService.save_message(project_id, "user", message, db=db)
 
             conversation = ContextManager.build_conversation_string(
                 project_id, db=db, max_chars=10000
             )
 
-            result = await AdaptiveFlowService.process_message(
-                project_id, message, conversation, None, []
-            )
-            response_text = result["response"]
+            # 使用新 FlowService + 流式输出
+            flow_service = getattr(websocket.app.state, "flow_service", None)
+            if not flow_service:
+                from services.flow.service import FlowService
+                flow_service = FlowService()
 
-            ProjectService.save_message(
-                project_id, "assistant", response_text,
-                skill_used=result["current_phase"], db=db
-            )
+            full_response = ""
+            final_data = {}
 
+            async for chunk in flow_service.process_message_stream(
+                project_id, message, conversation, force_workflow, attachments
+            ):
+                if chunk.get("content"):
+                    await websocket.send_json({
+                        "type": "chunk",
+                        "content": chunk["content"],
+                        "phase": chunk.get("phase", ""),
+                    })
+                    full_response += chunk["content"]
+
+                if chunk.get("done"):
+                    final_data = chunk
+
+            # 发送完成消息
             await websocket.send_json({
                 "type": "message",
-                "response": response_text,
-                "phase": result["current_phase"],
+                "response": full_response,
+                "phase": final_data.get("current_phase", final_data.get("phase", "")),
                 "project_id": project_id,
+                "completion_score": final_data.get("completion_score", 0),
+                "suggested_next": final_data.get("suggested_next", ""),
+                "channel": final_data.get("channel", "standard"),
+                "intent": final_data.get("intent", ""),
+                "detected_skill": final_data.get("detected_skill"),
+                "hitl_interrupt": final_data.get("hitl_interrupt"),
             })
+
+            ProjectService.save_message(
+                project_id, "assistant", full_response,
+                skill_used=final_data.get("current_phase", ""), db=db
+            )
     except WebSocketDisconnect:
         logger.info(f"WebSocket disconnected for project {project_id}")
     except Exception as e:

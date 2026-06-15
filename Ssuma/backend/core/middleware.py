@@ -18,11 +18,6 @@ PUBLIC_PATHS: Set[str] = {
     "/redoc",
 }
 
-SSE_PATHS: Set[str] = {
-    "/api/v1/flow/chat/stream",
-    "/api/v1/chat/stream",
-}
-
 SENSITIVE_PATHS: Set[str] = {
     "/api/cache/clear",
     "/api/v1/cache/clear",
@@ -102,7 +97,7 @@ class RateLimitMiddleware:
             return
 
         path = scope.get("path", "")
-        if path in PUBLIC_PATHS or path in SSE_PATHS:
+        if path in PUBLIC_PATHS:
             await self.app(scope, receive, send)
             return
 
@@ -136,7 +131,7 @@ class RequestBodySizeLimitMiddleware:
             return
 
         path = scope.get("path", "")
-        if path in SSE_PATHS:
+        if path in PUBLIC_PATHS:
             await self.app(scope, receive, send)
             return
 
@@ -182,14 +177,25 @@ class APIKeyMiddleware:
                 return value.decode()
         return ""
 
+    def _get_origin(self, scope: Scope) -> str:
+        for key, value in scope.get("headers", []):
+            if key == b"origin":
+                return value.decode()
+        return ""
+
     async def __call__(self, scope: Scope, receive: Receive, send: Send):
         if scope["type"] != "http":
             await self.app(scope, receive, send)
             return
 
         path = scope.get("path", "")
+        method = scope.get("method", "")
 
-        if path.startswith("/ws/") or path in SSE_PATHS or path in PUBLIC_PATHS:
+        if path.startswith("/ws/") or path in PUBLIC_PATHS:
+            await self.app(scope, receive, send)
+            return
+
+        if method == "OPTIONS":
             await self.app(scope, receive, send)
             return
 

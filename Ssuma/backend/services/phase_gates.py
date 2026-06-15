@@ -1,28 +1,22 @@
 """阶段完成度评估器 — Phase Completion Gate
 
 核心思想：每个阶段定义明确的完成条件，基于内容覆盖度而非轮数。
+
+双层评估策略：
+  - 快速路径（默认）：关键词匹配 + 权重计算，低延迟、可预测
+  - 深度路径（可选）：LLM 辅助评估，高精度、可理解语义
+
 参考 Garry Tan /gstack 的角色分离模式 + NeoLabHQ/reflexion 自精炼循环。
 """
 from typing import Dict, Any, List, Optional
-from dataclasses import dataclass, field
 from enum import Enum
 import json
 import logging
 import re
 
+from domain.results import CompletionResult
+
 logger = logging.getLogger('Ssuma.PhaseGates')
-
-
-@dataclass
-class CompletionResult:
-    """阶段完成度评估结果"""
-    phase: str
-    score: float  # 0.0 - 1.0
-    dimensions_covered: List[str] = field(default_factory=list)
-    dimensions_missing: List[str] = field(default_factory=list)
-    should_advance: bool = False
-    reasoning: str = ""
-    next_questions: List[str] = field(default_factory=list)
 
 
 class PhaseCompletionGate:
@@ -71,7 +65,7 @@ class PhaseCompletionGate:
             "min_conversation_turns": 2,
             "advance_threshold": 0.55,
         },
-        "questionnaire": {
+        "tanyin": {
             "required_dimensions": {
                 "basic_info": {"label": "基本信息", "keywords": ["名称", "项目", "类型"], "weight": 0.2},
                 "target_audience": {"label": "目标受众", "keywords": ["用户", "受众", "客户"], "weight": 0.2},
@@ -274,3 +268,100 @@ class PhaseCompletionGate:
         }
         phase_suggestions = suggestions.get(phase, {})
         return [phase_suggestions.get(d, f"请补充 {d} 相关的信息") for d in missing_dims]
+
+    @classmethod
+    async def evaluate_with_llm(
+        cls,
+        phase: str,
+        conversation: str,
+        conversation_turns: int = 0,
+        llm_provider=None,
+    ) -> CompletionResult:
+        """LLM 辅助的深度评估
+
+        先用关键词快速路径得到基础分数，再用 LLM 校准。
+        如果 LLM 不可用，回退到纯关键词评估。
+        """
+        # 1. 快速路径作为基础
+        base_result = cls.evaluate(phase, conversation, conversation_turns)
+
+        # 2. 如果 LLM 不可用，直接返回
+        if llm_provider is None:
+            try:
+                from core.llm_factory import LLMFactory
+                llm_provider = LLMFactory.get_provider()
+            except Exception:
+                return base_result
+
+        # 3. 只在边界情况下调用 LLM（分数在阈值附近时）
+        gate = cls.GATES.get(phase)
+        if not gate:
+            return base_result
+
+        threshold = gate["advance_threshold"]
+        # 如果快速路径已经明确通过或明确不通过，不需要 LLM
+        if base_result.score >= threshold + 0.15 or base_result.score < threshold - 0.15:
+            return base_result
+
+        # 4. LLM 校准
+        try:
+            dim_descriptions = "\n".join(
+                f"- {k}: {v['label']} — {v.get('description', v['label'])}"
+                for k, v in gate["required_dimensions"].items()
+            )
+            prompt = f"""评估以下对话在「{phase}」阶段的完成度。
+
+必须覆盖的维度：
+{dim_descriptions}
+
+对话内容（最近部分）：
+{conversation[-2000:]}
+
+请用 JSON 格式返回：
+{{
+  "score": 0.0-1.0,
+  "dimensions_covered": ["dim1", "dim2"],
+  "dimensions_missing": ["dim3"],
+  "reasoning": "简短说明",
+  "next_question": "建议的下一个问题"
+}}
+
+只返回 JSON，不要其他内容。"""
+
+            import asyncio
+            response = await asyncio.wait_for(
+                llm_provider.chat(
+                    [{"role": "user", "content": prompt}],
+                    max_tokens=300,
+                    temperature=0.1,
+                ),
+                timeout=15.0,
+            )
+
+            # 解析 LLM 返回的 JSON
+            json_match = re.search(r'\{[\s\S]*\}', response)
+            if json_match:
+                llm_result = json.loads(json_match.group())
+                llm_score = float(llm_result.get("score", base_result.score))
+                llm_score = max(0.0, min(1.0, llm_score))
+
+                # 融合：快速路径和 LLM 各占 40%/60%
+                blended_score = base_result.score * 0.4 + llm_score * 0.6
+
+                return CompletionResult(
+                    phase=phase,
+                    score=round(blended_score, 3),
+                    dimensions_covered=llm_result.get("dimensions_covered", base_result.dimensions_covered),
+                    dimensions_missing=llm_result.get("dimensions_missing", base_result.dimensions_missing),
+                    should_advance=(
+                        blended_score >= threshold
+                        and len(llm_result.get("dimensions_covered", [])) >= gate["min_dimensions_covered"]
+                    ),
+                    reasoning=llm_result.get("reasoning", base_result.reasoning),
+                    next_questions=[llm_result.get("next_question", "")] if llm_result.get("next_question") else base_result.next_questions,
+                )
+
+        except Exception as e:
+            logger.warning(f"LLM evaluation failed, falling back to keyword: {e}")
+
+        return base_result

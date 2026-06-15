@@ -1,33 +1,43 @@
 from typing import Dict, Any, List, Optional
-from dataclasses import dataclass, field
 from datetime import datetime
+from pydantic import BaseModel, Field
 from domain.enums import UserIntent, ClarityLevel, FlowPhase
 
+INTENT_LABELS = {
+    UserIntent.QISHU: "启枢",
+    UserIntent.TANYIN: "探隐",
+    UserIntent.CAIHENG: "裁衡",
+    UserIntent.ZHENWEI: "甄微",
+    UserIntent.CESHU: "策书",
+    UserIntent.NINGMO: "凝墨",
+    UserIntent.CHAT: "对话",
+    UserIntent.UNKNOWN: "待分析",
+}
 
-class IntentAnalysisResult:
+CLARITY_LABELS = {
+    ClarityLevel.FUZZY: "模糊 - 需要引导",
+    ClarityLevel.PARTIAL: "部分清晰 - 需要澄清",
+    ClarityLevel.CLEAR: "清晰 - 可以直接生成方案",
+    ClarityLevel.TECHNICAL: "技术讨论 - 深入实现层面",
+}
 
-    def __init__(
-        self,
-        intent: UserIntent,
-        clarity: ClarityLevel,
-        confidence: float,
-        reasoning: str,
-        recommended_workflow: str,
-        next_action: str,
-        context: Optional[Dict[str, Any]] = None,
-    ):
-        self.intent = intent
-        self.clarity = clarity
-        self.confidence = confidence
-        self.reasoning = reasoning
-        self.recommended_workflow = recommended_workflow
-        self.next_action = next_action
-        self.context = context or {}
+
+class IntentAnalysisResult(BaseModel):
+    """意图分析结果 — Pydantic 结构化输出"""
+    intent: UserIntent
+    clarity: ClarityLevel
+    confidence: float = Field(ge=0.0, le=1.0)
+    reasoning: str = ""
+    recommended_workflow: str = ""
+    next_action: str = ""
+    context: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "intent": self.intent.value,
+            "intent_label": INTENT_LABELS.get(self.intent, ""),
             "clarity": self.clarity.value,
+            "clarity_label": CLARITY_LABELS.get(self.clarity, ""),
             "confidence": self.confidence,
             "reasoning": self.reasoning,
             "recommended_workflow": self.recommended_workflow,
@@ -36,8 +46,18 @@ class IntentAnalysisResult:
         }
 
 
-@dataclass
-class SkillResult:
+class CompletionResult(BaseModel):
+    """阶段完成度评估结果 — Pydantic 结构化输出"""
+    phase: str
+    score: float = Field(ge=0.0, le=1.0)
+    dimensions_covered: List[str] = Field(default_factory=list)
+    dimensions_missing: List[str] = Field(default_factory=list)
+    should_advance: bool = False
+    reasoning: str = ""
+    next_questions: List[str] = Field(default_factory=list)
+
+
+class SkillResult(BaseModel):
     """Skill 执行结果的统一格式
 
     所有 Skill.run() 必须返回此类型。
@@ -57,55 +77,24 @@ class SkillResult:
         return result
 
 
-@dataclass
-class CompletionResult:
-    """阶段完成度评估结果"""
+class PhaseArtifact(BaseModel):
+    """阶段产出的结构化物件 — Pydantic 结构化输出"""
     phase: str
-    score: float
-    dimensions_covered: List[str] = field(default_factory=list)
-    dimensions_missing: List[str] = field(default_factory=list)
-    can_advance: bool = False
-    reason: str = ""
-
-
-@dataclass
-class PhaseArtifact:
-    """阶段产出的结构化物件"""
-    phase: str
-    summary: str
-    decisions: List[str] = field(default_factory=list)
-    commitments: List[Dict[str, str]] = field(default_factory=list)
-    open_questions: List[str] = field(default_factory=list)
-    key_insights: List[str] = field(default_factory=list)
+    summary: str = ""
+    decisions: List[str] = Field(default_factory=list)
+    commitments: List[Dict[str, str]] = Field(default_factory=list)
+    open_questions: List[str] = Field(default_factory=list)
+    key_insights: List[str] = Field(default_factory=list)
     raw_output: str = ""
-    created_at: str = field(default_factory=lambda: datetime.now().isoformat())
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    created_at: str = Field(default_factory=lambda: datetime.now().isoformat())
+    metadata: Dict[str, Any] = Field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        return {
-            "phase": self.phase,
-            "summary": self.summary,
-            "decisions": self.decisions,
-            "commitments": self.commitments,
-            "open_questions": self.open_questions,
-            "key_insights": self.key_insights,
-            "created_at": self.created_at,
-            "metadata": self.metadata,
-        }
+        return self.model_dump()
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "PhaseArtifact":
-        return cls(
-            phase=data.get("phase", ""),
-            summary=data.get("summary", ""),
-            decisions=data.get("decisions", []),
-            commitments=data.get("commitments", []),
-            open_questions=data.get("open_questions", []),
-            key_insights=data.get("key_insights", []),
-            raw_output=data.get("raw_output", ""),
-            created_at=data.get("created_at", datetime.now().isoformat()),
-            metadata=data.get("metadata", {}),
-        )
+        return cls.model_validate(data)
 
     def to_compact_context(self) -> str:
         parts = [f"[{self.phase}阶段总结]"]

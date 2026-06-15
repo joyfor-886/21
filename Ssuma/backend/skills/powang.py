@@ -4,34 +4,11 @@ from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 
 from core.skill_registry import Skill, SkillResult
+from domain.enums import WORKFLOW_SYSTEM_PROMPTS
 
 logger = logging.getLogger('Ssuma.PowangSkill')
 
-POANG_SYSTEM_PROMPT = """你是"破妄"技能 - 项目需求覆盖度审查专家。
-
-你的职责是验证生成的方案是否满足原始需求，并给出明确的覆盖度评估。
-
-【核心任务】
-1. 提取原始需求：从对话历史中识别用户最初提出的需求
-2. 对照检查：对比需求与生成的方案/代码
-3. 覆盖评估：标记每项需求的满足状态
-4. 给出建议：是否需要返工或继续
-
-【评估标准】
-- 已完成：该需求已在方案中实现
-- 需补充：该需求部分实现，需要完善
-- 未提及：该需求完全未涉及
-- 超出范围：该需求不在本项目范围内
-
-【输出格式】
-请以JSON格式输出评估结果，包含：
-coverage_percent: 0-100
-total_requirements: 数量
-details: 详情数组
-overall_assessment: 通过/需补充/需返工
-recommendation: 总体建议
-
-注意：如果评估结果coverage_percent < 70%，强烈建议返工。"""
+POANG_SYSTEM_PROMPT = WORKFLOW_SYSTEM_PROMPTS["powang"]
 
 
 class PowangSkill(Skill):
@@ -72,7 +49,7 @@ class PowangSkill(Skill):
             response = await provider.chat(
                 [{"role": "system", "content": POANG_SYSTEM_PROMPT},
                  {"role": "user", "content": prompt}],
-                max_tokens=1000,
+                max_tokens=2048,
                 temperature=0.3
             )
 

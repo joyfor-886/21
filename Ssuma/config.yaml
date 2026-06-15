@@ -58,3 +58,28 @@ storage:
   db_path: ./ssuma.db
   outputs_dir: ./outputs
   uploads_dir: ./uploads
+
+# MCP (Model Context Protocol) 服务器配置
+# 启用后，Ssuma 可以调用外部工具扩展智能体能力
+# 示例：
+# mcp_servers:
+#   filesystem:
+#     enabled: false
+#     type: stdio
+#     command: npx
+#     args: ["-y", "@modelcontextprotocol/server-filesystem", "/tmp"]
+#     description: "文件系统访问"
+#   github:
+#     enabled: false
+#     type: stdio
+#     command: npx
+#     args: ["-y", "@modelcontextprotocol/server-github"]
+#     env:
+#       GITHUB_PERSONAL_ACCESS_TOKEN: ${GITHUB_TOKEN}
+#     description: "GitHub 操作"
+#   remote-api:
+#     enabled: false
+#     type: http
+#     url: http://localhost:8080/mcp
+#     description: "远程 API 服务"
+mcp_servers: {}

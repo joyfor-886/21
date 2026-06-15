@@ -4,13 +4,7 @@ QualityGate - 数据质量门控
 """
 
 from typing import Dict, Any, Optional
-from enum import Enum
-
-
-class DataQuality(Enum):
-    APPROVED = "approved"      # 通过
-    REJECTED = "rejected"      # 拒绝
-    PENDING = "pending"         # 待审核
+from domain.enums import DataQuality
 
 
 class QualityGate:

@@ -81,3 +81,12 @@ class Config:
     @property
     def server(self):
         return self._config.get("server", {})
+
+    @property
+    def mcp(self):
+        return self._config.get("mcp_servers", {})
+
+    @classmethod
+    def reload(cls):
+        if cls._instance is not None:
+            cls._instance._load_config()

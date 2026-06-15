@@ -66,7 +66,7 @@ class FlowState:
         return state
 
 
-class QuestionnaireState:
+class TanyinState:
     """问卷运行时状态"""
 
     def __init__(self, project_id: str = ""):
@@ -86,7 +86,7 @@ class QuestionnaireState:
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "QuestionnaireState":
+    def from_dict(cls, data: Dict[str, Any]) -> "TanyinState":
         state = cls(project_id=data.get("project_id", ""))
         state.current_stage = data.get("current_stage", "basic_info")
         state.answers = data.get("answers", {})

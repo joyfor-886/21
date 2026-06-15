@@ -10,6 +10,12 @@ class ChatRequest(BaseModel):
     attachments: Optional[List[dict]] = []
 
 
+class CreateProjectRequest(BaseModel):
+    id: Optional[str] = None
+    name: str = "New Project"
+    description: str = ""
+
+
 class ChatResponse(BaseModel):
     project_id: str
     response: str
@@ -35,6 +41,7 @@ class FlowChatResponse(BaseModel):
     suggested_next_action: Optional[str] = None
     workflow_options: Optional[List[Dict]] = []
     completed: bool = False
+    hitl_interrupt: Optional[Dict] = None
 
 
 class GenerationRequest(BaseModel):
@@ -52,11 +59,12 @@ class ModelFetchRequest(BaseModel):
     base_url: Optional[str] = None
 
 
-class QuestionnaireRequest(BaseModel):
+class TanyinRequest(BaseModel):
     project_id: str
+    message: Optional[str] = None
 
 
-class QuestionnaireSubmitRequest(BaseModel):
+class TanyinSubmitRequest(BaseModel):
     project_id: str
     answers: Dict[str, Any]
 

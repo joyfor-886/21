@@ -84,6 +84,22 @@ DOC_TYPES = [
 # ======= 内存存储（生产应使用数据库）======
 
 _docs_cache: Dict[str, ProjectDocuments] = {}
+_STATE_SERVICE_NAME = "wiki_docs"
+
+
+def _save_docs_to_repo(project_id: str):
+    from core.state_repository import StateRepository
+    docs = _docs_cache.get(project_id)
+    if docs:
+        StateRepository.save(_STATE_SERVICE_NAME, project_id, docs.model_dump())
+
+
+def _load_docs_from_repo(project_id: str) -> Optional[ProjectDocuments]:
+    from core.state_repository import StateRepository
+    data = StateRepository.load(_STATE_SERVICE_NAME, project_id)
+    if data is not None:
+        return ProjectDocuments(**data)
+    return None
 
 
 # ======= Endpoints =======
@@ -100,7 +116,11 @@ async def get_project_documents(project_id: str):
     if project_id in _docs_cache:
         return _docs_cache[project_id]
 
-    # 如果缓存不存在，创建默认文档包
+    cached = _load_docs_from_repo(project_id)
+    if cached:
+        _docs_cache[project_id] = cached
+        return cached
+
     modules = [
         DocumentModule(
             id=str(uuid.uuid4()),
@@ -121,6 +141,7 @@ async def get_project_documents(project_id: str):
     )
 
     _docs_cache[project_id] = docs
+    _save_docs_to_repo(project_id)
     return docs
 
 
@@ -150,6 +171,7 @@ async def add_annotation(document_id: str, req: AnnotationRequest):
         for module in docs.modules:
             if module.id == document_id:
                 module.annotations.append(annotation)
+                _save_docs_to_repo(docs.project_id)
                 return annotation
 
     raise HTTPException(status_code=404, detail="Document not found")
@@ -212,6 +234,7 @@ async def mark_as_reviewed(document_id: str):
             if module.id == document_id:
                 module.status = "reviewed"
                 docs.reviewed_count += 1
+                _save_docs_to_repo(docs.project_id)
                 return {"success": True, "status": "reviewed"}
 
     raise HTTPException(status_code=404, detail="Document not found")

@@ -1,12 +1,12 @@
-export const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000"
+export const API_BASE = ""
 
 export const PHASE_LABELS: Record<string, { label: string; icon: string; desc: string }> = {
-  qishu: { label: "启枢", icon: "chat", desc: "头脑风暴" },
-  questionnaire: { label: "问卷", icon: "file", desc: "需求收集" },
-  caiheng: { label: "裁衡", icon: "filter", desc: "CEO审视" },
+  qishu: { label: "启枢", icon: "chat", desc: "追问澄清" },
+  tanyin: { label: "探隐", icon: "file", desc: "探求隐情" },
+  caiheng: { label: "裁衡", icon: "filter", desc: "价值审视" },
   zhenwei: { label: "甄微", icon: "search", desc: "技术评审" },
-  ceshu: { label: "策书", icon: "file", desc: "实施计划" },
-  powang: { label: "破妄", icon: "filter", desc: "需求覆盖" },
+  ceshu: { label: "策书", icon: "file", desc: "任务规划" },
+  powang: { label: "破妄", icon: "filter", desc: "覆盖验证" },
   jianyan: { label: "渐衍", icon: "leaf", desc: "分阶段生成" },
   ningmo: { label: "凝墨", icon: "file", desc: "方案生成" },
   completed: { label: "完成", icon: "check-circle", desc: "规划完成" },
@@ -34,4 +34,21 @@ export const TIER_THEME_MAP: Record<string, "primary" | "warning" | "danger"> = 
   adequate: "primary",
   basic: "warning",
   insufficient: "danger",
+}
+
+export const COMPLEXITY_LABELS: Record<string, { label: string; color: string }> = {
+  simple: { label: "简单", color: "#22c55e" },
+  moderate: { label: "中等", color: "#eab308" },
+  complex: { label: "复杂", color: "#f97316" },
+  platform: { label: "平台级", color: "#ef4444" },
+}
+
+export const AUTOPILOT_PHASE_LABELS: Record<string, string> = {
+  qishu: "启枢 · 追问澄清",
+  caiheng: "裁衡 · 价值审视",
+  zhenwei: "甄微 · 技术评审",
+  ceshu: "策书 · 任务规划",
+  ningmo: "凝墨 · 方案整合",
+  powang: "破妄 · 覆盖验证",
+  jianyan: "渐衍 · 分阶段生成",
 }

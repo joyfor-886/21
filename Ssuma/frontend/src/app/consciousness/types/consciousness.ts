@@ -2,13 +2,20 @@ export type Theme = 'xuanmo' | 'xuanzhi'
 
 export type GradeLevel = 'supreme' | 'excellent' | 'good' | 'pass'
 
-export type PhaseKey = 'qishu' | 'questionnaire' | 'caiheng' | 'zhenwei' | 'ceshu' | 'ningmo'
+export type PhaseKey = 'qishu' | 'tanyin' | 'caiheng' | 'zhenwei' | 'ceshu' | 'ningmo'
+
+export interface InteractiveOption {
+  label: string
+  text: string
+  type?: 'fill'
+}
 
 export interface InkMessage {
   id: string
   role: 'user' | 'assistant'
   content: string
   timestamp: number
+  interactiveOptions?: InteractiveOption[]
 }
 
 export interface PhaseInfo {
@@ -19,7 +26,7 @@ export interface PhaseInfo {
   isComplete: boolean
 }
 
-export interface QuestionnaireItem {
+export interface TanyinItem {
   type: 'checkbox' | 'radio' | 'text'
   label: string
   options?: string[]
@@ -27,9 +34,9 @@ export interface QuestionnaireItem {
   required?: boolean
 }
 
-export interface Questionnaire {
+export interface Tanyin {
   title: string
-  items: QuestionnaireItem[]
+  items: TanyinItem[]
 }
 
 export interface TechMetrics {
@@ -40,11 +47,16 @@ export interface TechMetrics {
 
 export interface VoiceState {
   isListening: boolean
+  isProcessing: boolean
   amplitude: number
+  lowFreq: number
+  midFreq: number
+  highFreq: number
   transcript: string
+  isSupported: boolean
 }
 
-export type PanelType = 'history' | 'artifact' | 'study' | null
+export type PanelType = 'history' | 'artifact' | 'study' | 'mcp' | null
 
 export interface ProjectOrb {
   id: string
@@ -64,7 +76,7 @@ export interface ProjectOrb {
 
 export const PHASE_COLORS: Record<string, { r: number; g: number; b: number; hex: string }> = {
   qishu: { r: 100, g: 140, b: 200, hex: '#648cc8' },
-  questionnaire: { r: 80, g: 170, b: 160, hex: '#50aaa0' },
+  tanyin: { r: 80, g: 170, b: 160, hex: '#50aaa0' },
   caiheng: { r: 140, g: 100, b: 180, hex: '#8c64b4' },
   zhenwei: { r: 80, g: 160, b: 100, hex: '#50a064' },
   ceshu: { r: 180, g: 130, b: 70, hex: '#b48246' },

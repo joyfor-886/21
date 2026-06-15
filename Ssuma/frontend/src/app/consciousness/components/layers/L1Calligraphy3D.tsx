@@ -7,7 +7,7 @@ import * as THREE from 'three'
 
 const PHASE_LABELS: Record<string, string> = {
   qishu: '启枢',
-  questionnaire: '问卷',
+  tanyin: '探隐',
   caiheng: '裁衡',
   zhenwei: '甄微',
   ceshu: '策书',

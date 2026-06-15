@@ -1,6 +1,6 @@
 """
 枢墨启枢技能 (qishu.py)
-启枢 - 头脑风暴，通过 LLM 动态生成情境追问来澄清需求
+启枢 - 追问澄清，通过 LLM 动态生成情境追问来澄清需求
 
 核心原则：
 1. 所有追问由 LLM 根据用户输入动态生成，不用硬编码选项
@@ -12,46 +12,18 @@
 from typing import Dict, Any, List, Optional
 from core.skill_registry import Skill, SkillResult
 from core.llm_factory import LLMFactory
+from domain.enums import WORKFLOW_SYSTEM_PROMPTS
 import json
 import logging
 
 logger = logging.getLogger('Ssuma.Qishu')
 
-QISHU_SYSTEM_PROMPT = """你是枢墨的启枢专家。你的角色是通过对话帮助用户从模糊想法走向清晰需求。
-
-核心原则：
-1. 一次只问一个问题，不要连续追问
-2. 根据用户描述的具体项目，生成针对性的追问和选项
-3. 选项必须与用户的项目相关，绝不使用通用模板
-4. 如果用户已经说得比较清楚，直接总结确认，不要强行追问
-
-工作方式：
-- 分析用户已描述的内容
-- 判断还有哪些关键信息缺失（目标用户、核心场景、关键功能、使用方式等）
-- 生成1个最关键的追问，附带3-4个具体选项
-- 每个选项都要贴合用户的项目场景，而非泛泛而谈
-
-输出格式要求（严格遵守）：
-1. 先用1-2句话肯定用户想法的价值，体现你理解了他们的方向
-2. 提出1个关键问题，用 🎯 标记
-3. 给出3-4个选项，用编号列表，每个选项简短明确
-4. 最后加一句"💡 或者直接告诉我你的想法"
-5. 全部输出不超过200字
-
-反例（绝对禁止）：
-- 问记账用户"你想做什么领域的产品？"
-- 问广告管理系统用户"花销/时间无感知？"
-- 使用与用户项目无关的通用选项模板
-
-正例（你应该做到）：
-- 用户说"广告管理系统"→ 问"主要服务哪类客户？" + 选项如"广告公司/品牌方/加工厂"
-- 用户说"健身App"→ 问"用户坚持健身最大的障碍是？" + 选项如"缺乏计划/难以坚持/不知道怎么练"
-"""
+QISHU_SYSTEM_PROMPT = WORKFLOW_SYSTEM_PROMPTS["qishu"]
 
 
 class BrainstormingSkill(Skill):
     """
-    启枢技能 - 头脑风暴专家（LLM 动态追问版）
+    启枢技能 - 追问澄清专家（LLM 动态追问版）
 
     工作流程：
     1. 将用户输入 + 系统提示词交给 LLM
@@ -60,7 +32,7 @@ class BrainstormingSkill(Skill):
     """
 
     name = "qishu"
-    description = "启枢 - 头脑风暴，通过情境追问澄清需求"
+    description = "启枢 - 追问澄清，通过情境追问澄清需求"
     trigger = "我想做"
 
     def __init__(self):
@@ -82,8 +54,8 @@ class BrainstormingSkill(Skill):
         try:
             response = await provider.chat(
                 messages=messages,
-                max_tokens=512,
-                temperature=0.8,
+                max_tokens=800,
+                temperature=0.7,
             )
             response = self._ensure_format(response)
         except Exception as e:

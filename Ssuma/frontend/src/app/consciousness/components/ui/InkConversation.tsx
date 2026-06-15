@@ -1,12 +1,15 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import type { InkMessage } from '../../types/consciousness'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import type { InkMessage, InteractiveOption } from '../../types/consciousness'
 
 interface Props {
   messages: InkMessage[]
   isThinking?: boolean
   thinkingStartTime?: number
+  onOptionClick?: (option: InteractiveOption) => void
 }
 
 function formatTime(ts: number): string {
@@ -25,7 +28,55 @@ function formatDuration(ms: number): string {
   return `${min}m${remainSec}s`
 }
 
-export default function InkConversation({ messages, isThinking = false, thinkingStartTime }: Props) {
+function InteractiveOptions({ options, onOptionClick }: { options: InteractiveOption[]; onOptionClick: (opt: InteractiveOption) => void }) {
+  const [fillValue, setFillValue] = useState('')
+  const fillRef = useRef<HTMLInputElement>(null)
+
+  const hasFill = options.some(o => o.type === 'fill')
+  const choiceOptions = options.filter(o => o.type !== 'fill')
+
+  const handleFillSubmit = useCallback(() => {
+    if (fillValue.trim()) {
+      onOptionClick({ label: 'fill', text: fillValue.trim(), type: 'fill' })
+      setFillValue('')
+    }
+  }, [fillValue, onOptionClick])
+
+  return (
+    <div className="interactive-options">
+      {choiceOptions.length > 0 && (
+        <div className="option-chips">
+          {choiceOptions.map((opt, i) => (
+            <button
+              key={i}
+              className="option-chip"
+              onClick={() => onOptionClick(opt)}
+            >
+              <span className="option-chip-label">{opt.label}</span>
+              <span className="option-chip-text">{opt.text}</span>
+            </button>
+          ))}
+        </div>
+      )}
+      {hasFill && (
+        <div className="option-fill">
+          <input
+            ref={fillRef}
+            type="text"
+            className="option-fill-input"
+            value={fillValue}
+            onChange={e => setFillValue(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') handleFillSubmit() }}
+            placeholder="输入你的回答..."
+          />
+          <button className="option-fill-submit" onClick={handleFillSubmit}>→</button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default function InkConversation({ messages, isThinking = false, thinkingStartTime, onOptionClick }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [displayMessages, setDisplayMessages] = useState<InkMessage[]>([])
   const [thinkingDuration, setThinkingDuration] = useState<number>(0)
@@ -35,8 +86,11 @@ export default function InkConversation({ messages, isThinking = false, thinking
     setDisplayMessages(prev => {
       const merged = [...prev]
       for (const msg of messages) {
-        if (!merged.find(m => m.id === msg.id)) {
+        const existingIdx = merged.findIndex(m => m.id === msg.id)
+        if (existingIdx === -1) {
           merged.push(msg)
+        } else if (msg.content !== merged[existingIdx].content) {
+          merged[existingIdx] = msg
         }
       }
       return merged
@@ -90,7 +144,18 @@ export default function InkConversation({ messages, isThinking = false, thinking
                 </span>
               )}
             </div>
-            <div className="ink-trace-text">{msg.content}</div>
+            {msg.role === 'assistant' ? (
+              <div className="ink-trace-text ink-trace-markdown">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {msg.content}
+                </ReactMarkdown>
+                {msg.interactiveOptions && msg.interactiveOptions.length > 0 && onOptionClick && (
+                  <InteractiveOptions options={msg.interactiveOptions} onOptionClick={onOptionClick} />
+                )}
+              </div>
+            ) : (
+              <div className="ink-trace-text">{msg.content}</div>
+            )}
             <div className="ink-trace-divider" />
           </div>
         ))}

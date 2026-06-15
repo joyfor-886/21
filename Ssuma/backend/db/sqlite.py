@@ -29,12 +29,12 @@ class Database:
             self._local.conn.execute("PRAGMA synchronous=NORMAL")
             self._local.conn.execute("PRAGMA busy_timeout=5000")
             self._local.conn.execute("PRAGMA cache_size=-64000")
-            self._create_tables()
-            self._run_migrations()
         return self._local.conn
 
     def _init_db(self):
-        self._get_connection()
+        conn = self._get_connection()
+        self._create_tables()
+        self._run_migrations()
 
     def _create_tables(self):
         conn = self._get_connection()
@@ -97,7 +97,7 @@ class Database:
                 confidence REAL,
                 workflow_history TEXT,
                 conversation_turns INTEGER DEFAULT 0,
-                questionnaire_completed BOOLEAN DEFAULT 0,
+                tanyin_completed BOOLEAN DEFAULT 0,
                 analysis_completed BOOLEAN DEFAULT 0,
                 plan_completed BOOLEAN DEFAULT 0,
                 spec_generated BOOLEAN DEFAULT 0,
@@ -371,15 +371,21 @@ class Database:
         conn = self._get_connection()
         cursor = conn.cursor()
         cursor.execute(query, params)
-        conn.commit()
+        query_upper = query.strip().upper()
+        if not query_upper.startswith(('SELECT', 'PRAGMA', 'WITH')):
+            conn.commit()
         return cursor
 
     def fetchone(self, query: str, params: tuple = ()):
-        cursor = self.execute(query, params)
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        cursor.execute(query, params)
         return cursor.fetchone()
 
     def fetchall(self, query: str, params: tuple = ()):
-        cursor = self.execute(query, params)
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        cursor.execute(query, params)
         return cursor.fetchall()
 
     def execute_many(self, query: str, params_list: list):

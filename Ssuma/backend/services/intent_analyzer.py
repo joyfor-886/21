@@ -3,73 +3,20 @@ import json
 import logging
 
 from domain.enums import UserIntent, ClarityLevel
+from domain.results import IntentAnalysisResult, INTENT_LABELS
 
 logger = logging.getLogger(__name__)
 
 
-INTENT_LABELS = {
-    UserIntent.QISHU: "启枢",
-    UserIntent.QUESTIONNAIRE: "需求澄清",
-    UserIntent.CAIHENG: "裁衡",
-    UserIntent.ZHENWEI: "甄微",
-    UserIntent.CESHU: "策书",
-    UserIntent.NINGMO: "凝墨",
-    UserIntent.CHAT: "对话",
-    UserIntent.UNKNOWN: "待分析",
-}
-
-
 INTENT_DESCRIPTIONS = {
     UserIntent.QISHU: "帮助用户澄清想法，通过问答引导深入思考",
-    UserIntent.QUESTIONNAIRE: "通过系统化问卷收集需求信息",
+    UserIntent.TANYIN: "通过探隐阶段系统化收集需求信息",
     UserIntent.CAIHENG: "从CEO视角审视产品价值和范围",
     UserIntent.ZHENWEI: "讨论技术架构和实现细节",
     UserIntent.CESHU: "拆分为可执行的实施任务",
     UserIntent.NINGMO: "生成完整的AI可执行项目方案",
     UserIntent.CHAT: "普通对话，不进入特定工作流",
 }
-
-
-class IntentAnalysisResult:
-    def __init__(
-        self,
-        intent: UserIntent,
-        clarity: ClarityLevel,
-        confidence: float,
-        reasoning: str,
-        recommended_workflow: str,
-        next_action: str,
-        context: Dict[str, Any] = None
-    ):
-        self.intent = intent
-        self.clarity = clarity
-        self.confidence = confidence
-        self.reasoning = reasoning
-        self.recommended_workflow = recommended_workflow
-        self.next_action = next_action
-        self.context = context or {}
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "intent": self.intent.value,
-            "intent_label": INTENT_LABELS.get(self.intent, ""),
-            "clarity": self.clarity.value,
-            "clarity_label": self._get_clarity_label(),
-            "confidence": self.confidence,
-            "reasoning": self.reasoning,
-            "recommended_workflow": self.recommended_workflow,
-            "next_action": self.next_action,
-            "context": self.context,
-        }
-
-    def _get_clarity_label(self) -> str:
-        labels = {
-            ClarityLevel.FUZZY: "模糊 - 需要引导",
-            ClarityLevel.PARTIAL: "部分清晰 - 需要澄清",
-            ClarityLevel.CLEAR: "清晰 - 可以直接生成方案",
-            ClarityLevel.TECHNICAL: "技术讨论 - 深入实现层面",
-        }
-        return labels.get(self.clarity, "")
 
 
 class FlowState:
@@ -79,7 +26,7 @@ class FlowState:
         self.current_clarity: ClarityLevel = ClarityLevel.PARTIAL
         self.workflow_history: List[Dict[str, Any]] = []
         self.conversation_turns = 0
-        self.questionnaire_completed = False
+        self.tanyin_completed = False
         self.analysis_completed = False
         self.plan_completed = False
         self.spec_generated = False
@@ -93,7 +40,7 @@ class FlowState:
             "current_clarity": self.current_clarity.value,
             "workflow_history": self.workflow_history,
             "conversation_turns": self.conversation_turns,
-            "questionnaire_completed": self.questionnaire_completed,
+            "tanyin_completed": self.tanyin_completed,
             "analysis_completed": self.analysis_completed,
             "plan_completed": self.plan_completed,
             "spec_generated": self.spec_generated,
@@ -117,7 +64,7 @@ class FlowState:
             state.current_clarity = ClarityLevel.PARTIAL
         state.workflow_history = data.get("workflow_history", [])
         state.conversation_turns = data.get("conversation_turns", 0)
-        state.questionnaire_completed = data.get("questionnaire_completed", False)
+        state.tanyin_completed = data.get("tanyin_completed", False)
         state.analysis_completed = data.get("analysis_completed", False)
         state.plan_completed = data.get("plan_completed", False)
         state.spec_generated = data.get("spec_generated", False)
@@ -128,8 +75,22 @@ class FlowState:
 
 class IntentAnalyzer:
     _instances: Dict[str, FlowState] = {}
+    MAX_INMEMORY_PROJECTS = 200
 
     STATE_SERVICE_NAME = "intent_analyzer"
+
+    @classmethod
+    def _evict_if_needed(cls):
+        if len(cls._instances) <= cls.MAX_INMEMORY_PROJECTS:
+            return
+        excess = len(cls._instances) - cls.MAX_INMEMORY_PROJECTS
+        keys_to_evict = sorted(
+            cls._instances.keys(),
+            key=lambda k: cls._instances[k].conversation_turns
+        )[:excess]
+        for key in keys_to_evict:
+            del cls._instances[key]
+            logger.info(f"IntentAnalyzer evicted project {key} (LRU)")
 
     @classmethod
     def _ensure_loaded(cls, project_id: str):
@@ -140,6 +101,7 @@ class IntentAnalyzer:
                 cls._instances[project_id] = FlowState.from_dict(data)
             else:
                 cls._instances[project_id] = FlowState(project_id)
+            cls._evict_if_needed()
 
     @classmethod
     def _save_to_repo(cls, project_id: str):
@@ -193,19 +155,24 @@ class IntentAnalyzer:
 
         has_history = bool(conversation_history.strip())
 
-        if not has_history:
+        if not has_history and state.conversation_turns == 0:
             result = await cls._analyze_initial_message(message, state)
         elif state.conversation_turns <= 1:
             result = cls._rule_based_analysis(message, state)
             if result is None or result.context.get("workflow_change"):
                 result = await cls._analyze_continuation(message, conversation_history, state)
+            elif result.intent == UserIntent.CHAT and has_history:
+                result = await cls._analyze_continuation(message, conversation_history, state)
         else:
             result = cls._rule_based_analysis(message, state)
             if result is None:
                 result = await cls._analyze_continuation(message, conversation_history, state)
+            elif result.intent == UserIntent.CHAT and has_history:
+                result = await cls._analyze_continuation(message, conversation_history, state)
 
         state.current_intent = result.intent
         state.current_clarity = result.clarity
+        state.conversation_turns += 1
         cls._save_to_repo(project_id)
 
         return result
@@ -256,7 +223,7 @@ class IntentAnalyzer:
         """
         workflow_map = {
             "qishu": UserIntent.QISHU,
-            "questionnaire": UserIntent.QUESTIONNAIRE,
+            "tanyin": UserIntent.TANYIN,
             "caiheng": UserIntent.CAIHENG,
             "zhenwei": UserIntent.ZHENWEI,
             "ceshu": UserIntent.CESHU,
@@ -285,7 +252,7 @@ class IntentAnalyzer:
         """分析用户的第一条消息
 
         [BUG FIX] LLM prompt 中的 intent 枚举值必须与 UserIntent 一致：
-        "qishu" | "questionnaire" | "caiheng" | "zhenwei" | "ceshu" | "ningmo" | "chat"
+        "qishu" | "tanyin" | "caiheng" | "zhenwei" | "ceshu" | "ningmo" | "chat"
         """
         from core.llm_factory import LLMFactory
 
@@ -301,7 +268,7 @@ class IntentAnalyzer:
 请以JSON格式输出分析结果：
 {{
     "clarity": "fuzzy" | "partial" | "clear" | "technical",
-    "intent": "qishu" | "questionnaire" | "caiheng" | "zhenwei" | "ceshu" | "ningmo" | "chat",
+    "intent": "qishu" | "tanyin" | "caiheng" | "zhenwei" | "ceshu" | "ningmo" | "chat",
     "confidence": 0.0-1.0,
     "reasoning": "简短的分析说明（50字以内）",
     "key_insights": ["用户可能真正想要的", "可能的盲点"],
@@ -377,7 +344,7 @@ class IntentAnalyzer:
 请以JSON格式输出：
 {{
     "clarity": "fuzzy" | "partial" | "clear" | "technical",
-    "intent": "qishu" | "questionnaire" | "caiheng" | "zhenwei" | "ceshu" | "ningmo" | "chat",
+    "intent": "qishu" | "tanyin" | "caiheng" | "zhenwei" | "ceshu" | "ningmo" | "chat",
     "confidence": 0.0-1.0,
     "reasoning": "分析说明（50字以内）",
     "workflow_change": true | false,
@@ -429,6 +396,7 @@ class IntentAnalyzer:
 
         # 强关键词映射（优先级高于 LLM 结果）
         strong_patterns = {
+            UserIntent.QISHU: ["我想做", "帮我做", "我想开发", "我想创建", "帮我设计", "我需要做", "想要一个", "想做个", "做个app", "做个应用"],
             UserIntent.ZHENWEI: ["技术栈", "架构设计", "api设计", "数据库设计", "实现方案", "技术实现"],
             UserIntent.NINGMO: ["生成方案", "完整方案", "生成项目", "出方案", "写方案", "完整项目方案"],
             UserIntent.CESHU: ["实施计划", "任务拆分", "里程碑", "排期", "开发计划"],
@@ -588,7 +556,7 @@ class IntentAnalyzer:
 
         参考 Garry Tan /gstack 的工作流分层模式：
         - 快速通道（3步）：启枢 → 裁衡 → 凝墨
-        - 标准通道（5步）：启枢 → 问卷 → 裁衡 → 甄微 → 凝墨
+        - 标准通道（5步）：启枢 → 探隐 → 裁衡 → 甄微 → 凝墨
         - 深度通道（7步）：全阶段
         """
         if clarity == ClarityLevel.CLEAR and confidence > 0.8:
@@ -623,8 +591,8 @@ class IntentAnalyzer:
         elif any(kw in message_lower for kw in ["计划", "task", "实施", "milestone"]):
             intent = UserIntent.CESHU
             clarity = ClarityLevel.CLEAR
-        elif any(kw in message_lower for kw in ["问卷", "问问题", "需求收集"]):
-            intent = UserIntent.QUESTIONNAIRE
+        elif any(kw in message_lower for kw in ["探隐", "问卷", "问问题", "需求收集"]):
+            intent = UserIntent.TANYIN
             clarity = ClarityLevel.PARTIAL
         else:
             intent = UserIntent.QISHU
@@ -644,7 +612,7 @@ class IntentAnalyzer:
     def _get_next_action(cls, intent: UserIntent) -> str:
         actions = {
             UserIntent.QISHU: "继续提问，深入了解需求",
-            UserIntent.QUESTIONNAIRE: "呈现问卷，收集需求信息",
+            UserIntent.TANYIN: "进入探隐，收集需求信息",
             UserIntent.CAIHENG: "从产品价值角度重新审视",
             UserIntent.ZHENWEI: "讨论技术实现方案",
             UserIntent.CESHU: "分解为可执行的任务",
@@ -657,7 +625,7 @@ class IntentAnalyzer:
     def get_recommended_workflow(cls, clarity: ClarityLevel, intent: UserIntent) -> str:
         """根据清晰程度和意图推荐工作流"""
         if clarity == ClarityLevel.FUZZY:
-            return "questionnaire"
+            return "tanyin"
         elif clarity == ClarityLevel.PARTIAL:
             return "qishu"
         elif clarity == ClarityLevel.TECHNICAL:
@@ -665,7 +633,7 @@ class IntentAnalyzer:
         else:
             intent_workflow_map = {
                 UserIntent.QISHU: "qishu",
-                UserIntent.QUESTIONNAIRE: "questionnaire",
+                UserIntent.TANYIN: "tanyin",
                 UserIntent.CAIHENG: "caiheng",
                 UserIntent.ZHENWEI: "zhenwei",
                 UserIntent.CESHU: "ceshu",
@@ -678,11 +646,11 @@ class IntentAnalyzer:
     def get_workflow_options(cls, clarity: ClarityLevel) -> List[Dict[str, str]]:
         """获取给定清晰程度下的可选工作流"""
         options = [
-            {"id": "qishu", "label": "头脑风暴", "description": "自由讨论，深入思考"},
-            {"id": "questionnaire", "label": "需求问卷", "description": "系统化收集需求"},
-            {"id": "caiheng", "label": "CEO视角", "description": "重新审视产品价值"},
-            {"id": "zhenwei", "label": "技术评审", "description": "讨论技术实现"},
-            {"id": "ningmo", "label": "生成方案", "description": "产出具执行方案"},
+            {"id": "qishu", "label": "启枢", "description": "追问澄清，深入思考"},
+            {"id": "tanyin", "label": "探隐", "description": "探求隐情，系统化收集需求"},
+            {"id": "caiheng", "label": "裁衡", "description": "审视产品价值"},
+            {"id": "zhenwei", "label": "甄微", "description": "评审技术实现"},
+            {"id": "ningmo", "label": "凝墨", "description": "产出具执行方案"},
         ]
 
         if clarity == ClarityLevel.FUZZY:

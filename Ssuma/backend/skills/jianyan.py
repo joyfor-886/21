@@ -4,25 +4,11 @@ from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 
 from core.skill_registry import Skill, SkillResult
+from domain.enums import WORKFLOW_SYSTEM_PROMPTS
 
 logger = logging.getLogger('Ssuma.JianyanSkill')
 
-JIANYAN_SYSTEM_PROMPT = """你是"渐衍"技能 - 分阶段生成专家。
-
-你的职责是将复杂的项目方案拆分为多个阶段，逐步生成并验证每个阶段的可达成性。
-
-【分阶段策略】
-1. 先生成大纲/架构（Phase 1）
-2. 评估技术可行性（Phase 2）
-3. 生成详细规格（Phase 3）
-4. 验证完整性（Phase 4）
-
-每个阶段都可以单独Review和修正，避免一次性生成导致的质量问题。
-
-【输出格式】
-请描述你将如何分阶段生成此方案，并列出每个阶段的产出物和验证要点。
-
-保持简洁，明确每个阶段的交付物和时间预估。"""
+JIANYAN_SYSTEM_PROMPT = WORKFLOW_SYSTEM_PROMPTS["jianyan"]
 
 
 @dataclass
@@ -88,7 +74,7 @@ class JianyanSkill(Skill):
             response = await provider.chat(
                 [{"role": "system", "content": JIANYAN_SYSTEM_PROMPT},
                  {"role": "user", "content": prompt}],
-                max_tokens=800,
+                max_tokens=2048,
                 temperature=0.5
             )
 

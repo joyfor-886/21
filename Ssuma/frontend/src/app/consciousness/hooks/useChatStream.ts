@@ -1,28 +1,38 @@
 'use client'
 
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import type { InkMessage } from '../types/consciousness'
-import { API_BASE } from '../../../lib/constants'
+import type { HITLInterrupt } from '../../../lib/types'
+import { sendFlowChat } from '../../../lib/api'
 
 export function useChatStream() {
   const [messages, setMessages] = useState<InkMessage[]>([])
   const [loading, setLoading] = useState(false)
   const [loadingProgress, setLoadingProgress] = useState(0)
-  const abortRef = useRef<AbortController | null>(null)
-  const loadingRef = useRef(false)
+  const [hitlInterrupt, setHitlInterrupt] = useState<HITLInterrupt | null>(null)
+  const mountedRef = useRef(true)
+  const sendingRef = useRef(false)
+
+  useEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+    }
+  }, [])
 
   const sendMessage = useCallback(async (
     content: string,
     projectId: string | null
-  ) => {
-    if (!content.trim() || loadingRef.current) return null
+  ): Promise<{ response: string; project_id?: string } | null> => {
+    if (!content?.trim() || sendingRef.current) return null
 
-    abortRef.current?.abort()
+    const trimmedContent = content.trim()
+    sendingRef.current = true
 
     const userMsg: InkMessage = {
       id: `u-${Date.now()}`,
       role: 'user',
-      content: content.trim(),
+      content: trimmedContent,
       timestamp: Date.now(),
     }
 
@@ -35,102 +45,81 @@ export function useChatStream() {
     }
 
     setMessages(prev => [...prev, userMsg, aiMsg])
-    loadingRef.current = true
     setLoading(true)
     setLoadingProgress(10)
 
-    const abortController = new AbortController()
-    abortRef.current = abortController
-
     try {
-      const res = await fetch(`${API_BASE}/api/v1/flow/chat/stream`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ project_id: projectId || '', message: content.trim() }),
-        signal: abortController.signal,
-      })
+      const data = await sendFlowChat(projectId, trimmedContent)
 
-      if (!res.ok) throw new Error(`Error: ${res.status}`)
-      if (!res.body) throw new Error('No response body')
+      if (!data) throw new Error('No response from server')
 
-      const reader = res.body.getReader()
-      const decoder = new TextDecoder()
-      let buffer = ''
-      let accumulated = ''
-      let returnedProjectId: string | undefined
+      const aiContent = data.response || ''
+      const returnedProjectId = data.project_id
 
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
+      if (mountedRef.current) {
+        const interactiveOptions = (data.workflow_options || []).map(
+          (opt: { id: string; label: string; description: string }) => ({
+            label: opt.label || opt.id,
+            text: opt.description || opt.label,
+          })
+        )
 
-        buffer += decoder.decode(value, { stream: true })
-
-        const lines = buffer.split('\n')
-        buffer = lines.pop() || ''
-
-        for (const line of lines) {
-          const trimmed = line.trim()
-          if (!trimmed || !trimmed.startsWith('data:')) continue
-
-          const jsonStr = trimmed.slice(5).trim()
-          if (!jsonStr) continue
-
-          let parsed: any
-          try {
-            parsed = JSON.parse(jsonStr)
-          } catch {
-            continue
-          }
-
-          if (parsed.content) {
-            accumulated += parsed.content
-            const currentContent = accumulated
-            setMessages(prev =>
-              prev.map(m => m.id === aiMsgId ? { ...m, content: currentContent } : m)
-            )
-            setLoadingProgress(prev => Math.min(prev + 2, 90))
-          }
-
-          if (parsed.done) {
-            setLoadingProgress(100)
-            if (parsed.project_id) {
-              returnedProjectId = parsed.project_id
-            }
-          }
+        // 处理 HITL 中断
+        if (data.hitl_interrupt) {
+          setHitlInterrupt(data.hitl_interrupt as HITLInterrupt)
         }
+
+        setMessages(prev =>
+          prev.map(m => m.id === aiMsgId ? {
+            ...m,
+            content: aiContent,
+            interactiveOptions,
+          } : m)
+        )
+        setLoadingProgress(100)
+        setTimeout(() => {
+          if (mountedRef.current) {
+            setLoading(false)
+            setLoadingProgress(0)
+          }
+        }, 300)
       }
 
-      loadingRef.current = false
+      sendingRef.current = false
+      return { response: aiContent, project_id: returnedProjectId }
+
+    } catch (err: unknown) {
+      sendingRef.current = false
+
+      if (!mountedRef.current) return null
+
       setLoading(false)
       setLoadingProgress(0)
-      return { response: accumulated, project_id: returnedProjectId }
-    } catch (e: any) {
-      loadingRef.current = false
-      setLoading(false)
-      setLoadingProgress(0)
-      if (e.name !== 'AbortError') {
-        const errMsg: InkMessage = {
-          id: `e-${Date.now()}`,
-          role: 'assistant',
-          content: `连接异常：${e.message}`,
-          timestamp: Date.now(),
-        }
-        setMessages(prev => [...prev, errMsg])
-      }
+
+      const msg = err instanceof Error ? err.message : '未知错误'
+      setMessages(prev => [...prev, {
+        id: `e-${Date.now()}`,
+        role: 'assistant',
+        content: `⚠ ${msg}`,
+        timestamp: Date.now(),
+      }])
+
       return null
     }
   }, [])
 
   const clearMessages = useCallback(() => {
     setMessages([])
+    setHitlInterrupt(null)
   }, [])
 
+  const clearHITL = useCallback(() => setHitlInterrupt(null), [])
+
   const abort = useCallback(() => {
-    abortRef.current?.abort()
-    loadingRef.current = false
+    sendingRef.current = false
     setLoading(false)
     setLoadingProgress(0)
   }, [])
 
-  return { messages, loading, loadingProgress, sendMessage, clearMessages, abort }
+  return { messages, loading, loadingProgress, hitlInterrupt, sendMessage, clearMessages, clearHITL, abort }
 }

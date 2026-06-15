@@ -2,11 +2,15 @@
 
 :root {
   --font-geist-sans: var(--font-noto-serif);
+  --background: #08090a;
+  --foreground: #b8b0a0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-ink: #b8b0a0;
+  --color-ink-light: #d4cdc0;
   --font-sans: var(--font-noto-serif);
 }
 

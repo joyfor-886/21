@@ -1,6 +1,6 @@
 import pytest
 from services.response_validator import ResponseValidator
-from services.adaptive_flow import FlowPhase
+from domain.enums import FlowPhase
 
 def test_validate_qishu_too_many_questions():
     response = "What do you think? How should we do this? Which approach is best? When can we start?"

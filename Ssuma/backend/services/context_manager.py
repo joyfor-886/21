@@ -339,7 +339,7 @@ class ContextManager:
         new_message: str,
         db=None,
         system_prompt: str = "",
-        max_history: int = 10,
+        max_history: int = 30,
     ) -> List[Dict[str, str]]:
         """统一的结构化消息列表构建入口
 
@@ -393,7 +393,9 @@ class ContextManager:
         else:
             messages.extend(window.recent_messages)
 
-        # 4. 当前用户消息
-        messages.append({"role": "user", "content": new_message})
+        # 4. 当前用户消息（避免与 DB 历史重复）
+        last_msg_content = messages[-1]["content"] if messages else ""
+        if last_msg_content != new_message:
+            messages.append({"role": "user", "content": new_message})
 
         return messages

@@ -11,7 +11,6 @@
 设计依据：2026-05-06-ssuma-zero-to-hero-design.md 第十三章
 """
 
-from enum import Enum
 from typing import Optional, Dict, Any, List
 from dataclasses import dataclass
 import re
@@ -21,33 +20,9 @@ import httpx
 import asyncio
 
 from core.llm_factory import LLMFactory, LLMProvider, OpenAICompatibleProvider
+from domain.enums import ModelTier
 
 logger = logging.getLogger('Ssuma.LLMAdapter')
-
-
-class ModelTier(Enum):
-    """模型能力档次"""
-    ADEQUATE = "adequate"      # 🟢 达标档 - 完整七艺可用
-    BASIC = "basic"            # 🟡 基础档 - 部分功能降级
-    INSUFFICIENT = "insufficient"  # 🔴 不足档 - 仅启枢可用
-
-    @property
-    def label(self) -> str:
-        labels = {
-            ModelTier.ADEQUATE: "🟢 达标档",
-            ModelTier.BASIC: "🟡 基础档",
-            ModelTier.INSUFFICIENT: "🔴 不足档"
-        }
-        return labels[self]
-
-    @property
-    def color(self) -> str:
-        colors = {
-            ModelTier.ADEQUATE: "#22c55e",  # green
-            ModelTier.BASIC: "#eab308",       # yellow
-            ModelTier.INSUFFICIENT: "#ef4444" # red
-        }
-        return colors[self]
 
 
 @dataclass
@@ -66,7 +41,7 @@ class CapabilityConfig:
     """根据模型档次的能力配置"""
     qishu_enabled: bool = True           # 启枢（对话引导）
     qishu_depth: str = "full"            # full / simplified
-    caiheng_enabled: bool = True         # 裁衡（CEO审视）
+    caiheng_enabled: bool = True         # 裁衡（价值审视）
     caiheng_challenge_dims: int = 3      # 挑战维度数量
     zhenwei_enabled: bool = True         # 甄微（技术评审）
     zhenwei_scope: str = "full"         # full / core_only

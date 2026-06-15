@@ -8,7 +8,7 @@ interface Props {
   isVoiceMode: boolean
 }
 
-const PHASE_ORDER = ['qishu', 'questionnaire', 'caiheng', 'zhenwei', 'ceshu', 'ningmo']
+const PHASE_ORDER = ['qishu', 'tanyin', 'caiheng', 'zhenwei', 'ceshu', 'ningmo']
 
 export default function PhaseScroll({ phases, onPhaseClick, isVoiceMode }: Props) {
   const orderedPhases = PHASE_ORDER
@@ -17,18 +17,6 @@ export default function PhaseScroll({ phases, onPhaseClick, isVoiceMode }: Props
 
   return (
     <div className={`phase-scroll ${isVoiceMode ? 'hidden' : ''}`}>
-      {orderedPhases.map((phase, i) => (
-        <span key={phase.key}>
-          <div
-            className={`phase-mark ${phase.isCurrent ? 'current' : ''} ${phase.isComplete ? 'complete' : ''}`}
-            onClick={() => onPhaseClick(phase.key)}
-          >
-            <div className="phase-dot" />
-            <span className="phase-label">{phase.label}</span>
-          </div>
-          {i < orderedPhases.length - 1 && <div className="phase-vein" />}
-        </span>
-      ))}
     </div>
   )
 }

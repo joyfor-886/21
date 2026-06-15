@@ -130,7 +130,71 @@ class LMStudioProvider(OpenAIStyleProvider):
             reasoning = getattr(message, 'reasoning_content', None)
             if reasoning and reasoning.strip():
                 content = reasoning
-        return content or ""
+        return self._strip_thinking(content or "")
+
+    @staticmethod
+    def _strip_thinking(text: str) -> str:
+        import re
+        stripped = text
+
+        stripped = re.sub(
+            r'^\s*<think\b[^>]*>.*?</think\s*>\s*',
+            '', stripped, count=1, flags=re.DOTALL
+        )
+
+        stripped = re.sub(
+            r'^\s*Thinking Process:.*?(?=\n[^\s*]|\n\n)',
+            '', stripped, count=1, flags=re.DOTALL
+        )
+
+        stripped = re.sub(
+            r'(?:^|\n)\s*\d+\.\s+\*\*[^*]+\*\*:.*?(?=(?:\n\s*\d+\.\s+\*\*)|(?:\n\n)|$)',
+            '', stripped, flags=re.DOTALL
+        )
+
+        stripped = re.sub(
+            r'(?:^|\n)\s*\d+\.\s+\*\*[^*]+\*\*\s*(?=\n)',
+            '', stripped
+        )
+
+        stripped = re.sub(
+            r'(?:^|\n)\s*\*\*Self[- ]?Correction[^*]*\*\*.*?(?=(?:\n\s*\d+\.)|(?:\n\n)|$)',
+            '', stripped, flags=re.DOTALL
+        )
+
+        stripped = re.sub(
+            r'(?:^|\n)\s*\*\*Decision\*\*.*?(?=(?:\n\s*\d+\.)|(?:\n\n)|$)',
+            '', stripped, flags=re.DOTALL
+        )
+
+        stripped = re.sub(
+            r'(?:^|\n)\s*\*\*Drafting[^*]*\*\*.*?(?=(?:\n\s*\d+\.)|(?:\n\n)|$)',
+            '', stripped, flags=re.DOTALL
+        )
+
+        stripped = re.sub(
+            r'(?:^|\n)\s*\(Self[- ]?Correction[^)]*\)\s*',
+            '', stripped
+        )
+
+        stripped = re.sub(
+            r'(?:^|\n)\s*\*\*Final Polish[^*]*\*\*.*?(?=(?:\n\s*\d+\.)|(?:\n\n)|$)',
+            '', stripped, flags=re.DOTALL
+        )
+
+        lines = stripped.split('\n')
+        filtered = []
+        for line in lines:
+            if re.match(r'^\s*\d+\.\s+\*\*(Analyze|Determine|Check|Identify|Evaluate|Re-?evaluate|Self-?Correction|Decision|Drafting|Final)', line, re.IGNORECASE):
+                continue
+            if re.match(r'^\s*\d+\.\s+\*\*[A-Z][a-z]+[^*]*\*\*:', line):
+                continue
+            filtered.append(line)
+        stripped = '\n'.join(filtered)
+
+        stripped = re.sub(r'\n{3,}', '\n\n', stripped)
+
+        return stripped.strip() if stripped.strip() else text.strip()
 
     def _process_delta(self, delta):
         if delta.content:
@@ -140,70 +204,55 @@ class LMStudioProvider(OpenAIStyleProvider):
         return None
 
     def _auto_detect_model(self):
+        """验证 LM Studio 中用户配置的模型是否可用。
+
+        策略：
+        1. 仅验证用户配置的模型一次
+        2. 不遍历测试所有模型（避免用户加载大量模型时导致系统卡顿）
+        3. 配置无效时只记录警告，不做自动回退，让用户自行处理
+        """
         try:
             import httpx as _httpx
             models_url = self.base_url.rstrip("/") + "/models"
             resp = _httpx.get(models_url, timeout=5.0)
             if resp.status_code != 200:
+                logger.warning(f"LM Studio /models 端点返回 {resp.status_code}")
                 return
             data = resp.json().get("data", [])
             if not data:
+                logger.warning("LM Studio /models 端点返回空列表")
                 return
 
-            embedding_keywords = ("embed", "embedding", "rerank")
-            chat_models = [
-                m for m in data
-                if not any(kw in m.get("id", "").lower() for kw in embedding_keywords)
-            ]
-            if not chat_models:
-                chat_models = data
-
             configured = self.model
-            if configured:
-                for m in chat_models:
-                    if m.get("id") == configured:
-                        try:
-                            test_resp = _httpx.post(
-                                self.base_url.rstrip("/") + "/chat/completions",
-                                json={
-                                    "model": configured,
-                                    "messages": [{"role": "user", "content": "hi"}],
-                                    "max_tokens": 3,
-                                },
-                                timeout=8.0,
-                            )
-                            if test_resp.status_code == 200:
-                                self.model = configured
-                                logger.info(f"LM Studio using configured model: {self.model}")
-                                return
-                            else:
-                                logger.warning(f"LM Studio configured model '{configured}' not active (status {test_resp.status_code}), probing others...")
-                                break
-                        except Exception:
-                            logger.warning(f"LM Studio configured model '{configured}' probe failed, probing others...")
-                            break
+            if not configured:
+                logger.warning("LM Studio 未配置模型，请在设置中指定模型名称")
+                return
 
-            for m in chat_models:
-                mid = m.get("id", "")
-                try:
-                    test_resp = _httpx.post(
-                        self.base_url.rstrip("/") + "/chat/completions",
-                        json={
-                            "model": mid,
-                            "messages": [{"role": "user", "content": "hi"}],
-                            "max_tokens": 3,
-                        },
-                        timeout=8.0,
+            # 只验证用户配置的模型一次
+            try:
+                test_resp = _httpx.post(
+                    self.base_url.rstrip("/") + "/chat/completions",
+                    json={
+                        "model": configured,
+                        "messages": [{"role": "user", "content": "hi"}],
+                        "max_tokens": 3,
+                    },
+                    timeout=8.0,
+                )
+                if test_resp.status_code == 200:
+                    logger.info(f"LM Studio configured model verified: {self.model}")
+                    return
+                else:
+                    logger.warning(
+                        f"LM Studio 配置的模型 '{configured}' 不可用 "
+                        f"(HTTP {test_resp.status_code})。"
+                        f"请检查模型是否已加载，或在设置中更换模型。"
                     )
-                    if test_resp.status_code == 200:
-                        self.model = mid
-                        logger.info(f"LM Studio auto-detected active model: {self.model}")
-                        return
-                except Exception:
-                    continue
-
-            self.model = chat_models[0].get("id", self.model)
-            logger.warning(f"LM Studio no active model found, falling back to: {self.model}")
+            except Exception as e:
+                logger.warning(
+                    f"LM Studio 配置的模型 '{configured}' 验证失败: {e}。"
+                    f"请检查 LM Studio 是否正常运行，或在设置中更换模型。"
+                )
         except Exception as e:
             logger.warning(f"LM Studio model auto-detect failed: {e}")
 

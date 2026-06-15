@@ -12,7 +12,7 @@ from skills.powang import PowangSkill
 from skills.ceshu import PlanWritingSkill
 from skills.ningmo import SpecGeneratorSkill
 from skills.jianyan import JianyanSkill
-from services.adaptive_flow import AdaptiveFlowService
+from services.flow.service import FlowService
 from services.flow.router import FlowPhase, FlowRouter, CHANNEL_PHASES
 from services.flow.service import get_flow_service
 from services.phase_gates import PhaseCompletionGate
@@ -92,7 +92,7 @@ async def run():
 
     fs.phase_completion['qishu'] = 0.8
     np = router.determine_next_phase(FlowPhase.QISHU, intent, None, 'standard', fs.phase_completion)
-    record('standard→questionnaire', np == FlowPhase.QUESTIONNAIRE, f'实际={np.value}')
+    record('standard→tanyin', np == FlowPhase.TANYIN, f'实际={np.value}')
 
     fs.channel = 'fast'
     svc._channel_assignments[pid] = 'fast'

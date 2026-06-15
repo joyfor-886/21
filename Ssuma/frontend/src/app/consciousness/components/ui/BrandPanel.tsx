@@ -1,23 +1,24 @@
 'use client'
 
 import type { PanelType, TechMetrics } from '../../types/consciousness'
+import { COMPLEXITY_LABELS } from '../../../../lib/constants'
+import SsumaLogo from './SsumaLogo'
 
 interface Props {
   onLinkClick: (type: PanelType) => void
   techMetrics: TechMetrics
   sessionTurns: number
+  complexity: string
+  complexityLabel: string
   isVoiceMode: boolean
 }
 
-export default function BrandPanel({ onLinkClick, techMetrics, sessionTurns, isVoiceMode }: Props) {
+export default function BrandPanel({ onLinkClick, techMetrics, sessionTurns, complexity, complexityLabel, isVoiceMode }: Props) {
+  const complexityInfo = COMPLEXITY_LABELS[complexity]
+
   return (
     <div className={`brand-panel ${isVoiceMode ? 'hidden' : ''}`}>
-      <div className="brand-header">
-        <div className="brand-name-cn">枢墨</div>
-        <div className="brand-name-en">SSUMA</div>
-      </div>
-
-      <div className="brand-seal">枢</div>
+      <SsumaLogo />
 
       <div className="brand-links">
         <div
@@ -38,7 +39,25 @@ export default function BrandPanel({ onLinkClick, techMetrics, sessionTurns, isV
         >
           <span className="slash">/</span>文房
         </div>
+        <div
+          className="brand-link"
+          onClick={() => onLinkClick('mcp')}
+        >
+          <span className="slash">/</span>工具
+        </div>
       </div>
+
+      {complexityInfo && (
+        <div className="brand-complexity">
+          <span
+            className="complexity-dot"
+            style={{ background: complexityInfo.color }}
+          />
+          <span className="complexity-label">
+            项目复杂度：{complexityLabel || complexityInfo.label}
+          </span>
+        </div>
+      )}
 
       <div className="brand-session">
         {sessionTurns} 轮
@@ -62,6 +81,28 @@ export default function BrandPanel({ onLinkClick, techMetrics, sessionTurns, isV
           {techMetrics.latency}ms
         </div>
       </div>
+
+      <style jsx>{`
+        .brand-complexity {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          margin: 4px 0;
+          padding: 3px 8px;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.04);
+        }
+        .complexity-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          flex-shrink: 0;
+        }
+        .complexity-label {
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.5);
+        }
+      `}</style>
     </div>
   )
 }

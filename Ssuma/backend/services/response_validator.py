@@ -8,7 +8,7 @@ logger = logging.getLogger('Ssuma.ResponseValidator')
 
 REMIND_ROUNDS = {
     "qishu": [3, 5, 7],
-    "questionnaire": [2, 4, 6],
+    "tanyin": [2, 4, 6],
     "caiheng": [2, 4],
     "zhenwei": [2, 4],
     "ceshu": [2, 3],
@@ -174,7 +174,7 @@ class ResponseValidator:
         phase_value = getattr(phase, 'value', str(phase))
         reminders = {
             "qishu": "我们已经讨论了几轮，需求逐渐清晰。您觉得是否需要进入下一个阶段？可以从 CEO 视角审视产品价值，或者直接生成项目方案。",
-            "questionnaire": "我们已经收集了不少信息。您觉得是否需要进入下一个阶段？",
+            "tanyin": "我们已经收集了不少信息。您觉得是否需要进入下一个阶段？",
             "caiheng": "产品视角的讨论已经比较充分。是否要进入技术评审阶段，讨论具体的实现方案？",
             "zhenwei": "技术讨论已经比较深入。是否要生成完整的实施计划，或者直接生成项目方案？",
             "ceshu": "任务分解已经完成。是否要生成最终的项目方案？",
